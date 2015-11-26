@@ -19,10 +19,9 @@ class TVoxxServer: NSObject {
     }
     
     func getTalks(callback:([Talk] -> Void)) {
-        Alamofire.request(.GET, "\(host)/talks.json", parameters: nil)
+        Alamofire.request(.GET, "\(host)/talks.json?withVideo=true", parameters: nil)
             .responseJSON { response in
                 if let JSON = response.result.value as? [Dictionary<String, AnyObject>] {
-                    //print("JSON: \(JSON)")
                     var talks = [Talk]()
                     for talkDict in JSON {
                         if let thumbnailUrl = talkDict["thumbnailUrl"] as? String {
