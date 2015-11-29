@@ -14,7 +14,7 @@ class SpeakerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel:UILabel!
     
     func configureCellWithSpeaker(speaker:Speaker) {
-        self.nameLabel.text = "\(speaker.firstName!) \(speaker.lastName!)"
+        self.nameLabel.text = "\(speaker.firstName) \(speaker.lastName)"
         if let avatarUrl = speaker.avatarUrl, url = NSURL(string:avatarUrl) {
             self.avatarView.af_setImageWithURL(url, placeholderImage: nil)
         } else {

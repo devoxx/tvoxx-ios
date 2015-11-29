@@ -10,8 +10,8 @@ import UIKit
 
 class Speaker: NSObject {
     var uuid:String
-    var firstName:String?
-    var lastName:String?
+    var firstName:String
+    var lastName:String
     var avatarUrl:String?
     
     init(withUuid uuid:String, firstName:String, lastName:String, avatarUrl:String?) {

@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		B90932671C066085008DD9B7 /* TVoxxServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90932661C066085008DD9B7 /* TVoxxServer.swift */; };
 		B921CF091C065EE8008F7BEC /* TalkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B921CF081C065EE8008F7BEC /* TalkCollectionViewCell.swift */; };
+		B94328CC1C0BA72000EC18FE /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94328CB1C0BA72000EC18FE /* TrackCollectionViewCell.swift */; };
 		B98C9CFA1C066401007A47DE /* Talk.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98C9CF91C066401007A47DE /* Talk.swift */; };
 		B98FF7581BFFDAC70095FFBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FF7571BFFDAC70095FFBC /* AppDelegate.swift */; };
-		B98FF75A1BFFDAC70095FFBC /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FF7591BFFDAC70095FFBC /* FirstViewController.swift */; };
+		B98FF75A1BFFDAC70095FFBC /* TalksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FF7591BFFDAC70095FFBC /* TalksViewController.swift */; };
 		B98FF75C1BFFDAC70095FFBC /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FF75B1BFFDAC70095FFBC /* SecondViewController.swift */; };
 		B98FF75F1BFFDAC70095FFBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B98FF75D1BFFDAC70095FFBC /* Main.storyboard */; };
 		B98FF7611BFFDAC70095FFBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B98FF7601BFFDAC70095FFBC /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 		B98FF7771BFFDAC70095FFBC /* TVoxxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FF7761BFFDAC70095FFBC /* TVoxxUITests.swift */; };
 		B9D13B0E1C0A86F600EB42DD /* SpeakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D13B0D1C0A86F600EB42DD /* SpeakerCollectionViewCell.swift */; };
 		B9D13B101C0A878A00EB42DD /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D13B0F1C0A878A00EB42DD /* Speaker.swift */; };
+		B9D13B121C0B2D7500EB42DD /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D13B111C0B2D7500EB42DD /* Track.swift */; };
 		B9D8673C1C0675E900F89F58 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D8673A1C0675E900F89F58 /* AVFoundation.framework */; };
 		B9D8673D1C0675E900F89F58 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D8673B1C0675E900F89F58 /* AVKit.framework */; };
 		B9D867411C0688C600F89F58 /* TalkPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D867401C0688C600F89F58 /* TalkPlayerViewController.swift */; };
@@ -48,10 +50,11 @@
 		59A252D18530771AD0C9A2F9 /* Pods-TVoxx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVoxx.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVoxx/Pods-TVoxx.release.xcconfig"; sourceTree = "<group>"; };
 		B90932661C066085008DD9B7 /* TVoxxServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVoxxServer.swift; sourceTree = "<group>"; };
 		B921CF081C065EE8008F7BEC /* TalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkCollectionViewCell.swift; sourceTree = "<group>"; };
+		B94328CB1C0BA72000EC18FE /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		B98C9CF91C066401007A47DE /* Talk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talk.swift; sourceTree = "<group>"; };
 		B98FF7541BFFDAC70095FFBC /* TVoxx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVoxx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98FF7571BFFDAC70095FFBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B98FF7591BFFDAC70095FFBC /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		B98FF7591BFFDAC70095FFBC /* TalksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalksViewController.swift; sourceTree = "<group>"; };
 		B98FF75B1BFFDAC70095FFBC /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B98FF75E1BFFDAC70095FFBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B98FF7601BFFDAC70095FFBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 		B98FF7781BFFDAC70095FFBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9D13B0D1C0A86F600EB42DD /* SpeakerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerCollectionViewCell.swift; sourceTree = "<group>"; };
 		B9D13B0F1C0A878A00EB42DD /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		B9D13B111C0B2D7500EB42DD /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		B9D8673A1C0675E900F89F58 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B9D8673B1C0675E900F89F58 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		B9D867401C0688C600F89F58 /* TalkPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkPlayerViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				B98FF7571BFFDAC70095FFBC /* AppDelegate.swift */,
-				B98FF7591BFFDAC70095FFBC /* FirstViewController.swift */,
+				B98FF7591BFFDAC70095FFBC /* TalksViewController.swift */,
 				B98FF75B1BFFDAC70095FFBC /* SecondViewController.swift */,
 				B98FF75D1BFFDAC70095FFBC /* Main.storyboard */,
 				B98FF7601BFFDAC70095FFBC /* Assets.xcassets */,
@@ -153,6 +157,8 @@
 				B9D867401C0688C600F89F58 /* TalkPlayerViewController.swift */,
 				B9D13B0D1C0A86F600EB42DD /* SpeakerCollectionViewCell.swift */,
 				B9D13B0F1C0A878A00EB42DD /* Speaker.swift */,
+				B9D13B111C0B2D7500EB42DD /* Track.swift */,
+				B94328CB1C0BA72000EC18FE /* TrackCollectionViewCell.swift */,
 			);
 			path = TVoxx;
 			sourceTree = "<group>";
@@ -357,12 +363,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B94328CC1C0BA72000EC18FE /* TrackCollectionViewCell.swift in Sources */,
 				B9D867411C0688C600F89F58 /* TalkPlayerViewController.swift in Sources */,
+				B9D13B121C0B2D7500EB42DD /* Track.swift in Sources */,
 				B98FF75C1BFFDAC70095FFBC /* SecondViewController.swift in Sources */,
 				B98FF7581BFFDAC70095FFBC /* AppDelegate.swift in Sources */,
 				B921CF091C065EE8008F7BEC /* TalkCollectionViewCell.swift in Sources */,
 				B9D13B0E1C0A86F600EB42DD /* SpeakerCollectionViewCell.swift in Sources */,
-				B98FF75A1BFFDAC70095FFBC /* FirstViewController.swift in Sources */,
+				B98FF75A1BFFDAC70095FFBC /* TalksViewController.swift in Sources */,
 				B9D13B101C0A878A00EB42DD /* Speaker.swift in Sources */,
 				B90932671C066085008DD9B7 /* TVoxxServer.swift in Sources */,
 				B98C9CFA1C066401007A47DE /* Talk.swift in Sources */,

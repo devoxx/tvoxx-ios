@@ -49,4 +49,19 @@ class TVoxxServer: NSObject {
                 }
         }
     }
+    
+    func getTracks(callback:([Track] -> Void)) {
+        Alamofire.request(.GET, "\(host)/tracks.json", parameters: nil)
+            .responseJSON { (response: Response<AnyObject, NSError>) -> Void in
+                if let JSON = response.result.value as? [Dictionary<String, AnyObject>] {
+                    var tracks = [Track]()
+                    for trackDict in JSON {
+                        tracks.append(Track(withDictionary: trackDict))
+                    }
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        callback(tracks)
+                    })
+                }
+        }
+    }
 }

@@ -18,4 +18,10 @@ class Talk: NSObject {
         self.thumbnailUrl = thumbnailUrl
         self.youtubeUrl = youtubeUrl
     }
+    
+    init(withDictionary dict:Dictionary<String, AnyObject>) {
+        self.title = dict["title"] as! String
+        self.thumbnailUrl = dict["thumbnailUrl"] as! String
+        self.youtubeUrl = dict["youtubeUrl"] as! String
+    }
 }

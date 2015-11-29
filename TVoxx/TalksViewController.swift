@@ -11,11 +11,11 @@ import HCYoutubeParser
 import AVFoundation
 import AVKit
 
-class FirstViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class TalksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var collectionView:UICollectionView!
     
-    private var talks = [Talk]()
-    private var selectedTalk:Talk?
+    private var tracks = [Track]()
+    var selectedTalk:Talk?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +25,8 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        TVoxxServer.sharedServer.getTalks { (talks:[Talk]) -> Void in
-            self.talks = talks
+        TVoxxServer.sharedServer.getTracks { (tracks:[Track]) -> Void in
+            self.tracks = tracks
             self.collectionView.reloadData()
         }
     }
@@ -41,16 +41,24 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.talks.count
+        return self.tracks.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("TalkCell", forIndexPath: indexPath) as! TalkCollectionViewCell
-        
-        let talk = self.talks[indexPath.row]
-        cell.configureCellWithTalk(talk)
+        let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("TrackCell", forIndexPath: indexPath) as! TrackCollectionViewCell
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if let trackCell = cell as? TrackCollectionViewCell {
+            let track = self.tracks[indexPath.row]
+            trackCell.configureCellWithTrack(track, parentViewController:self)
+        }
+    }
+
+    func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -62,11 +70,6 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
                 playerViewController.player = player
             }
         }
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.selectedTalk = self.talks[indexPath.row]
-        self.performSegueWithIdentifier("showVideo", sender: self)
     }
 }
 

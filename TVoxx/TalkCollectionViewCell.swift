@@ -17,4 +17,15 @@ class TalkCollectionViewCell: UICollectionViewCell {
         self.titleLabel.text = talk.title
         self.thumbnailView.af_setImageWithURL(NSURL(string:talk.thumbnailUrl)!, placeholderImage: nil)
     }
+    
+    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+        coordinator.addCoordinatedAnimations({ [unowned self] in
+            if self.focused {
+                self.titleLabel.textColor = UIColor.whiteColor()
+            }
+            else {
+                self.titleLabel.textColor = UIColor.blackColor()
+            }
+        }, completion: nil)
+    }
 }
