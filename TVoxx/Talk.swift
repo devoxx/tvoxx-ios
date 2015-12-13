@@ -11,17 +11,17 @@ import UIKit
 class Talk: NSObject {
     var title:String
     var thumbnailUrl:String
-    var youtubeUrl:String
+    var youtubeVideoId:String
     
-    init(withTitle title:String, thumbnailUrl: String, youtubeUrl:String) {
+    init(withTitle title:String, thumbnailUrl: String, youtubeVideoId:String) {
         self.title = title
         self.thumbnailUrl = thumbnailUrl
-        self.youtubeUrl = youtubeUrl
+        self.youtubeVideoId = youtubeVideoId
     }
     
     init(withDictionary dict:Dictionary<String, AnyObject>) {
         self.title = dict["title"] as! String
         self.thumbnailUrl = dict["thumbnailUrl"] as! String
-        self.youtubeUrl = dict["youtubeUrl"] as! String
+        self.youtubeVideoId = dict["youtubeVideoId"] as! String
     }
 }

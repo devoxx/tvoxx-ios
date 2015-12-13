@@ -64,7 +64,7 @@ class TalksViewController: UIViewController, UICollectionViewDataSource, UIColle
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "showVideo") {
             if let playerViewController = segue.destinationViewController as? AVPlayerViewController, talk = self.selectedTalk {
-                let videos = HCYoutubeParser.h264videosWithYoutubeURL(NSURL(string: talk.youtubeUrl)!)
+                let videos = HCYoutubeParser.h264videosWithYoutubeID(talk.youtubeVideoId)
                 let videoUrl = NSURL(string: videos["hd720"] as! String)!
                 let player = AVPlayer(URL: videoUrl)
                 playerViewController.player = player
