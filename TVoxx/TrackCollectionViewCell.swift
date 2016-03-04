@@ -2,48 +2,47 @@
 //  TrackCollectionViewCell.swift
 //  TVoxx
 //
-//  Created by Sebastien Arbogast on 29/11/2015.
-//  Copyright © 2015 Epseelon. All rights reserved.
+//  Created by Sebastien Arbogast on 02/03/2016.
+//  Copyright © 2016 Epseelon. All rights reserved.
 //
 
 import UIKit
+import AlamofireImage
 
-class TrackCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
-    @IBOutlet weak var titleLabel:UILabel!
-    @IBOutlet weak var talksCollectionView:UICollectionView!
+class TrackCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var collectionView:UICollectionView!
     
-    private var track = Track(withTrackId: "", title: "", talks: [Talk]())
-    private var parentViewController:TalksViewController?
-    
-    func configureCellWithTrack(track:Track, parentViewController:TalksViewController) {
-        self.track = track
-        self.parentViewController = parentViewController
-        self.titleLabel.text = track.title
-        self.talksCollectionView.reloadData()
+    var track:Track? {
+        didSet {
+            self.collectionView.reloadData()
+        }
     }
     
+    override func canBecomeFocused() -> Bool {
+        return false
+    }
+}
+
+extension TrackCollectionViewCell: UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return 1;
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.track.talks.count
+        if let talks = self.track?.talks {
+            return talks.count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier("TalkCell", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TalkCell", forIndexPath: indexPath) as! TalkCollectionViewCell
+        cell.talk = self.track?.talks[indexPath.row]
+        return cell
     }
+}
+
+extension TrackCollectionViewCell: UICollectionViewDelegate {
     
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if let talkCell = cell as? TalkCollectionViewCell {
-            talkCell.configureCellWithTalk(self.track.talks[indexPath.row])
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let talksViewController = self.parentViewController {
-            talksViewController.selectedTalk = self.track.talks[indexPath.row]
-            talksViewController.performSegueWithIdentifier("showVideo", sender: self)
-        }
-    }
 }

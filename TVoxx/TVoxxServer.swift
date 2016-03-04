@@ -25,7 +25,7 @@ class TVoxxServer: NSObject {
                     var talks = [Talk]()
                     for talkDict in JSON {
                         if let thumbnailUrl = talkDict["thumbnailUrl"] as? String {
-                            talks.append(Talk(withTitle: talkDict["title"] as! String, thumbnailUrl: thumbnailUrl, youtubeVideoId:talkDict["youtubeVideoId"] as! String))
+                            talks.append(Talk(withTitle: talkDict["title"] as! String, thumbnailUrl: thumbnailUrl, youtubeVideoId:talkDict["youtubeVideoId"] as! String, speakerNames: talkDict["speakerNames"] as! [String], averageRating:talkDict["averageRating"] as? Double))
                         }
                     }
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -61,6 +61,8 @@ class TVoxxServer: NSObject {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         callback(tracks)
                     })
+                } else {
+                    print(response.debugDescription)
                 }
         }
     }
