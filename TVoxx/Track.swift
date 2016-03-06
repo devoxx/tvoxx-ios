@@ -11,9 +11,9 @@ import UIKit
 class Track: NSObject {
     var trackId:String
     var title:String
-    var talks:[Talk]
+    var talks:[TalkListItem]
     
-    init(withTrackId trackId: String, title: String, talks: [Talk]) {
+    init(withTrackId trackId: String, title: String, talks: [TalkListItem]) {
         self.trackId = trackId
         self.title = title
         self.talks = talks
@@ -22,10 +22,10 @@ class Track: NSObject {
     init(withDictionary dict:Dictionary<String, AnyObject>) {
         self.trackId = dict["trackId"] as! String
         self.title = dict["title"] as! String
-        var talks = [Talk]()
+        var talks = [TalkListItem]()
         if let talksArray = dict["talks"] as? [Dictionary<String, AnyObject>] {
             for talkDict in talksArray {
-                talks.append(Talk(withDictionary:talkDict))
+                talks.append(TalkListItem(withDictionary:talkDict))
             }
         }
         self.talks = talks

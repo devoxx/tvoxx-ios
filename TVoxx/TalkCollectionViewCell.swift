@@ -13,7 +13,7 @@ class TalkCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var imageView:UIImageView!
     
-    var talk:Talk? {
+    var talk: TalkListItem? {
         didSet {
             if let talk = talk {
                 self.titleLabel.text = talk.title

@@ -44,5 +44,8 @@ extension TrackCollectionViewCell: UICollectionViewDataSource {
 }
 
 extension TrackCollectionViewCell: UICollectionViewDelegate {
-    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let talk = self.track?.talks[indexPath.row]
+        NSNotificationCenter.defaultCenter().postNotificationName("talkSelected", object: self, userInfo: ["selectedTalk":talk!])
+    }
 }

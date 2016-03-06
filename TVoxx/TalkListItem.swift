@@ -8,22 +8,24 @@
 
 import UIKit
 
-class Talk: NSObject {
+class TalkListItem: NSObject {
+    var talkId:String
     var title:String
     var thumbnailUrl:String
     var youtubeVideoId:String
     var speakerNames:[String]
     var averageRating:Double?
     
-    init(withTitle title:String, thumbnailUrl: String, youtubeVideoId:String, speakerNames:[String], averageRating:Double?) {
+    /*init(withTitle title:String, thumbnailUrl: String, youtubeVideoId:String, speakerNames:[String], averageRating:Double?) {
         self.title = title
         self.thumbnailUrl = thumbnailUrl
         self.youtubeVideoId = youtubeVideoId
         self.speakerNames = speakerNames
         self.averageRating = averageRating
-    }
+    }*/
     
-    init(withDictionary dict:Dictionary<String, AnyObject>) {
+    init(withDictionary dict:[String:AnyObject]) {
+        self.talkId = dict["talkId"] as! String
         self.title = dict["title"] as! String
         self.thumbnailUrl = dict["thumbnailUrl"] as! String
         self.youtubeVideoId = dict["youtubeVideoId"] as! String

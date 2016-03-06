@@ -15,7 +15,9 @@ class TracksViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     private var tracks = [Track]()
-    var selectedTalk:Talk?
+    var selectedTalk: TalkListItem?
+    
+    private var selectionObserver:AnyObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,26 @@ class TracksViewController: UIViewController {
             self.tracks = tracks
             self.collectionView.reloadData()
         }
+        
+        self.selectionObserver = NSNotificationCenter.defaultCenter().addObserverForName("talkSelected", object: nil, queue: NSOperationQueue.mainQueue()) { (notification:NSNotification) -> Void in
+            self.selectedTalk = notification.userInfo!["selectedTalk"] as? TalkListItem
+            self.performSegueWithIdentifier("showTalkDetail", sender: self)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showTalkDetail" {
+            if let talkDetailViewController = segue.destinationViewController as? TalkDetailViewController {
+                talkDetailViewController.talk = self.selectedTalk
+            }
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if let selectionObserver = self.selectionObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(selectionObserver)
+        }
+        super.viewWillAppear(animated)
     }
     
     override func didReceiveMemoryWarning() {

@@ -18,14 +18,14 @@ class TVoxxServer: NSObject {
         self.host = NSBundle.mainBundle().objectForInfoDictionaryKey("TVOXX_SERVER") as! String
     }
     
-    func getTalks(callback:([Talk] -> Void)) {
+    func getTalks(callback:([TalkListItem] -> Void)) {
         Alamofire.request(.GET, "\(host)/talks.json?withVideo=true", parameters: nil)
             .responseJSON { response in
                 if let JSON = response.result.value as? [Dictionary<String, AnyObject>] {
-                    var talks = [Talk]()
+                    var talks = [TalkListItem]()
                     for talkDict in JSON {
-                        if let thumbnailUrl = talkDict["thumbnailUrl"] as? String {
-                            talks.append(Talk(withTitle: talkDict["title"] as! String, thumbnailUrl: thumbnailUrl, youtubeVideoId:talkDict["youtubeVideoId"] as! String, speakerNames: talkDict["speakerNames"] as! [String], averageRating:talkDict["averageRating"] as? Double))
+                        if (talkDict["thumbnailUrl"] as? String) != nil {
+                            talks.append(TalkListItem(withDictionary: talkDict))
                         }
                     }
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -35,13 +35,25 @@ class TVoxxServer: NSObject {
         }
     }
     
-    func getSpeakers(callback:([Speaker] -> Void)) {
+    func getTalkWithTalkId(talkId:String, callback:(TalkDetail->Void)) {
+        Alamofire.request(.GET, "\(host)/talks/\(talkId).json")
+            .responseJSON { (response:Response<AnyObject, NSError>) in
+                if let JSON = response.result.value as? [String:AnyObject] {
+                    let talk = TalkDetail(withDictionary: JSON)
+                    dispatch_async(dispatch_get_main_queue(), { 
+                        callback(talk)
+                    })
+                }
+        }
+    }
+    
+    func getSpeakers(callback:([SpeakerListItem] -> Void)) {
         Alamofire.request(.GET, "\(host)/speakers.json", parameters: nil)
             .responseJSON { (response: Response<AnyObject, NSError>) -> Void in
                 if let JSON = response.result.value as? [Dictionary<String, AnyObject>] {
-                    var speakers = [Speaker]()
+                    var speakers = [SpeakerListItem]()
                     for speakerDict in JSON {
-                            speakers.append(Speaker(withUuid: speakerDict["uuid"] as! String, firstName: speakerDict["firstName"] as! String, lastName: speakerDict["lastName"] as! String, avatarUrl: speakerDict["avatarUrl"] as? String))
+                        speakers.append(SpeakerListItem(withDictionary:speakerDict))
                     }
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         callback(speakers)
