@@ -30,6 +30,8 @@ class TalkDetailViewController: UIViewController {
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var speakersCollectionView: UICollectionView!
     
+    private var topFocusGuide = UIFocusGuide()
+    
     var talk: TalkListItem? {
         didSet {
             guard self.loadingLabel != nil else { return }
@@ -46,6 +48,15 @@ class TalkDetailViewController: UIViewController {
         super.viewDidLoad()
 
         self.ratingView.settings.fillMode = .Precise
+        self.setupFocus()
+    }
+    
+    private func setupFocus() {
+        view.addLayoutGuide(self.topFocusGuide)
+        topFocusGuide.bottomAnchor.constraintEqualToAnchor(speakersCollectionView.topAnchor).active = true
+        topFocusGuide.leftAnchor.constraintEqualToAnchor(self.view.leftAnchor).active = true
+        topFocusGuide.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
+        topFocusGuide.topAnchor.constraintEqualToAnchor(self.playButton.bottomAnchor).active = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -77,6 +88,8 @@ class TalkDetailViewController: UIViewController {
                 self.thumbnailView.af_setImageWithURL(NSURL(string: talkDetail.thumbnailUrl)!)
                 self.durationLabel.text = talkDetail.duration
                 
+                self.speakersCollectionView.reloadData()
+                
                 self.loadingView.hidden = true
                 self.loadingLabel.hidden = true
                 self.titleLabel.hidden = false
@@ -94,6 +107,16 @@ class TalkDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+        guard let nextFocusedView = context.nextFocusedView else { return }
+        
+        if nextFocusedView.isKindOfClass(SpeakerCollectionViewCell) {
+            self.topFocusGuide.preferredFocusedView = self.playButton
+        } else {
+            self.topFocusGuide.preferredFocusedView = self.speakersCollectionView
+        }
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -109,4 +132,51 @@ class TalkDetailViewController: UIViewController {
         return self.playButton
     }
 
+}
+
+extension TalkDetailViewController: UICollectionViewDataSource {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        if let talk = self.talkDetail {
+            if talk.speakers.count > 0 {
+                return 1
+            } else {
+                return 0
+            }
+        } else {
+            return 0
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let talk = self.talkDetail {
+            if talk.speakers.count > 0 {
+                return talk.speakers.count
+            } else {
+                return 0
+            }
+        } else {
+            return 0
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SpeakerCell", forIndexPath: indexPath) as! SpeakerCollectionViewCell
+        cell.speaker = self.talkDetail!.speakers[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "SpeakersHeader", forIndexPath: indexPath) as! SpeakersCollectionReusableView
+            headerView.titleLabel.text = NSLocalizedString("Speakers", comment:"")
+            return headerView
+        default:
+            assert(false, "Unexpected supplementary view type")
+        }
+    }
+}
+
+extension TalkDetailViewController: UICollectionViewDelegate {
+    
 }

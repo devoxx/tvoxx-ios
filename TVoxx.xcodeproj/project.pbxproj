@@ -24,6 +24,8 @@
 		B9D8673C1C0675E900F89F58 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D8673A1C0675E900F89F58 /* AVFoundation.framework */; };
 		B9D8673D1C0675E900F89F58 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D8673B1C0675E900F89F58 /* AVKit.framework */; };
 		B9DCB72C1C8C5D88001B2585 /* TalkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCB72B1C8C5D88001B2585 /* TalkDetail.swift */; };
+		B9DCB72E1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCB72D1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift */; };
+		B9DCB7301C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCB72F1C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift */; };
 		D582E477987041F121CA13C8 /* Pods_TVoxx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3563B349859B3AD1D0F080 /* Pods_TVoxx.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,8 @@
 		B9D8673A1C0675E900F89F58 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B9D8673B1C0675E900F89F58 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		B9DCB72B1C8C5D88001B2585 /* TalkDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkDetail.swift; sourceTree = "<group>"; };
+		B9DCB72D1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerCollectionViewCell.swift; sourceTree = "<group>"; };
+		B9DCB72F1C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersCollectionReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,8 @@
 				B96286AF1C878A02006B4142 /* TrackCollectionViewCell.swift */,
 				B96286B11C878FBF006B4142 /* TalkCollectionViewCell.swift */,
 				B935703F1C8A5C18001F4589 /* TalkDetailViewController.swift */,
+				B9DCB72D1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift */,
+				B9DCB72F1C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift */,
 			);
 			path = TVoxx;
 			sourceTree = "<group>";
@@ -371,11 +377,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9DCB72E1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift in Sources */,
 				B96286B01C878A02006B4142 /* TrackCollectionViewCell.swift in Sources */,
 				B9D13B121C0B2D7500EB42DD /* Track.swift in Sources */,
 				B96286B21C878FBF006B4142 /* TalkCollectionViewCell.swift in Sources */,
 				B93570401C8A5C18001F4589 /* TalkDetailViewController.swift in Sources */,
 				B98FF7581BFFDAC70095FFBC /* AppDelegate.swift in Sources */,
+				B9DCB7301C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift in Sources */,
 				B98FF75A1BFFDAC70095FFBC /* TracksViewController.swift in Sources */,
 				B9D13B101C0A878A00EB42DD /* SpeakerListItem.swift in Sources */,
 				B90932671C066085008DD9B7 /* TVoxxServer.swift in Sources */,
