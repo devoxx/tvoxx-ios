@@ -86,7 +86,8 @@ class TalkDetailViewController: UIViewController {
                 self.abstractLabel.text = talkDetail.summary
                 self.languageLabel.text = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: talkDetail.lang)
                 self.thumbnailView.af_setImageWithURL(NSURL(string: talkDetail.thumbnailUrl)!)
-                self.durationLabel.text = talkDetail.duration
+                
+                self.durationLabel.text = Utils.formatDuration(talkDetail.durationInSeconds)
                 
                 self.speakersCollectionView.reloadData()
                 
@@ -131,7 +132,6 @@ class TalkDetailViewController: UIViewController {
     override var preferredFocusedView: UIView? {
         return self.playButton
     }
-
 }
 
 extension TalkDetailViewController: UICollectionViewDataSource {

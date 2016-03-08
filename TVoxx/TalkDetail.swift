@@ -22,7 +22,7 @@ class TalkDetail: NSObject {
     var thumbnailUrl:String
     var conferenceLabel:String
     var speakers:[SpeakerListItem]
-    var duration:String
+    var durationInSeconds:Int
     
     init(withDictionary dict:[String: AnyObject]) {
         self.talkId = dict["talkId"] as! String
@@ -37,7 +37,7 @@ class TalkDetail: NSObject {
         self.thumbnailUrl = dict["thumbnailUrl"] as! String
         self.youtubeVideoId = dict["youtubeVideoId"] as! String
         self.conferenceLabel = dict["conferenceLabel"] as! String
-        self.duration = dict["duration"] as! String
+        self.durationInSeconds = dict["durationInSeconds"] as! Int
         
         self.speakers = [SpeakerListItem]()
         if let speakers = dict["speakers"] as? [[String:AnyObject]] {
