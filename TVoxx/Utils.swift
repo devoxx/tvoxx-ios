@@ -13,12 +13,12 @@ class Utils: NSObject {
         let (h,m,s) = secondsToHoursMinutesSeconds(seconds)
         var durationString = ""
         if h>0 {
-            durationString += String(format: "%d", h) + ":"
+            durationString += String(format: "%d", h) + NSLocalizedString(" h ", comment: "")
         }
         if m>0 {
-            durationString += String(format: "%02d", m) + ":"
+            durationString += String(format: "%02d", m) + NSLocalizedString(" min ", comment: "")
         }
-        durationString += String(format: "%02d", s)
+        durationString += String(format: "%02d", s) + NSLocalizedString(" s", comment: "")
         
         return durationString
     }
