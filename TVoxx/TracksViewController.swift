@@ -12,7 +12,9 @@ import AVFoundation
 import AVKit
 
 class TracksViewController: UIViewController {
-    
+    @IBOutlet weak var loadingView: UIStackView!
+    @IBOutlet weak var loadingLabel: UILabel!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     private var tracks = [Track]()
     var selectedTalk: TalkListItem?
@@ -27,9 +29,21 @@ class TracksViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.collectionView.hidden = true
+        self.loadingIndicator.startAnimating()
+        self.loadingView.hidden = false
+        
         TVoxxServer.sharedServer.getTracks { (tracks:[Track]) -> Void in
-            self.tracks = tracks
-            self.collectionView.reloadData()
+            if tracks.count == 0 {
+                self.loadingLabel.text = NSLocalizedString("No talk to load", comment:"")
+                self.loadingIndicator.hidden = true
+                self.loadingView.hidden = false
+            } else {
+                self.loadingView.hidden = true
+                self.tracks = tracks
+                self.collectionView.reloadData()
+                self.collectionView.hidden = false
+            }
         }
         
         self.selectionObserver = NSNotificationCenter.defaultCenter().addObserverForName("talkSelected", object: nil, queue: NSOperationQueue.mainQueue()) { (notification:NSNotification) -> Void in

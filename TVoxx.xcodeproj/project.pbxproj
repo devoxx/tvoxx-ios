@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B90932671C066085008DD9B7 /* TVoxxServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90932661C066085008DD9B7 /* TVoxxServer.swift */; };
 		B93570401C8A5C18001F4589 /* TalkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B935703F1C8A5C18001F4589 /* TalkDetailViewController.swift */; };
+		B942BC201C9340E600957B11 /* SpeakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B942BC1F1C9340E600957B11 /* SpeakersViewController.swift */; };
 		B96286B01C878A02006B4142 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96286AF1C878A02006B4142 /* TrackCollectionViewCell.swift */; };
 		B96286B21C878FBF006B4142 /* TalkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96286B11C878FBF006B4142 /* TalkCollectionViewCell.swift */; };
 		B96286B41C878FD7006B4142 /* TrackCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96286B31C878FD7006B4142 /* TrackCollectionReusableView.swift */; };
@@ -53,6 +54,7 @@
 		59A252D18530771AD0C9A2F9 /* Pods-TVoxx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVoxx.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVoxx/Pods-TVoxx.release.xcconfig"; sourceTree = "<group>"; };
 		B90932661C066085008DD9B7 /* TVoxxServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVoxxServer.swift; sourceTree = "<group>"; };
 		B935703F1C8A5C18001F4589 /* TalkDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkDetailViewController.swift; sourceTree = "<group>"; };
+		B942BC1F1C9340E600957B11 /* SpeakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersViewController.swift; sourceTree = "<group>"; };
 		B96286AF1C878A02006B4142 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		B96286B11C878FBF006B4142 /* TalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkCollectionViewCell.swift; sourceTree = "<group>"; };
 		B96286B31C878FD7006B4142 /* TrackCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				B9DCB72D1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift */,
 				B9DCB72F1C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift */,
 				B9E216F51C8F2B0F001C4627 /* Utils.swift */,
+				B942BC1F1C9340E600957B11 /* SpeakersViewController.swift */,
 			);
 			path = TVoxx;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				B9DCB72E1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift in Sources */,
 				B96286B01C878A02006B4142 /* TrackCollectionViewCell.swift in Sources */,
 				B9D13B121C0B2D7500EB42DD /* Track.swift in Sources */,
+				B942BC201C9340E600957B11 /* SpeakersViewController.swift in Sources */,
 				B9E216F61C8F2B0F001C4627 /* Utils.swift in Sources */,
 				B96286B21C878FBF006B4142 /* TalkCollectionViewCell.swift in Sources */,
 				B93570401C8A5C18001F4589 /* TalkDetailViewController.swift in Sources */,
