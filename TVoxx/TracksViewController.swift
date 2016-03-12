@@ -96,6 +96,7 @@ extension TracksViewController : UICollectionViewDataSource {
             return headerView
         default:
             assert(false, "Unexpected supplementary view type")
+            return UICollectionReusableView()
         }
     }
 }

@@ -16,6 +16,7 @@ class SpeakersViewController: UIViewController {
     @IBOutlet weak var loadingLabel:UILabel!
     
     private var speakers:[SpeakerListItem]?
+    private var selectedSpeaker:SpeakerListItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +62,13 @@ class SpeakersViewController: UIViewController {
     }
     */
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showSpeakerDetail" {
+            if let speakerDetailViewController = segue.destinationViewController as? SpeakerDetailViewController, selectedSpeaker = self.selectedSpeaker {
+                speakerDetailViewController.speaker = selectedSpeaker
+            }
+        }
+    }
 }
 
 extension SpeakersViewController : UICollectionViewDataSource {
@@ -84,5 +92,8 @@ extension SpeakersViewController : UICollectionViewDataSource {
 }
 
 extension SpeakersViewController : UICollectionViewDelegate {
-    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.selectedSpeaker = self.speakers![indexPath.row]
+        self.performSegueWithIdentifier("showSpeakerDetail", sender: self)
+    }
 }

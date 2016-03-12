@@ -85,7 +85,7 @@ class TalkDetailViewController: UIViewController {
                 }
                 self.abstractLabel.text = talkDetail.summary
                 self.languageLabel.text = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: talkDetail.lang)
-                self.thumbnailView.af_setImageWithURL(NSURL(string: talkDetail.thumbnailUrl)!)
+                self.thumbnailView.af_setImageWithURL(NSURL(string: talkDetail.thumbnailUrl)!, placeholderImage: UIImage(named: "talk"))
                 
                 self.durationLabel.text = Utils.formatDuration(talkDetail.durationInSeconds)
                 
@@ -173,6 +173,7 @@ extension TalkDetailViewController: UICollectionViewDataSource {
             return headerView
         default:
             assert(false, "Unexpected supplementary view type")
+            return UICollectionReusableView()
         }
     }
 }

@@ -47,6 +47,18 @@ class TVoxxServer: NSObject {
         }
     }
     
+    func getSpeakerWithUuid(uuid:String, callback:(SpeakerDetail -> Void)) {
+        Alamofire.request(.GET, "\(host)/speakers/\(uuid).json")
+            .responseJSON{ (response:Response<AnyObject, NSError>) in
+                if let JSON = response.result.value as? [String:AnyObject] {
+                    let speaker = SpeakerDetail(withDictionary: JSON)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        callback(speaker)
+                    })
+                }
+        }
+    }
+    
     func getSpeakers(callback:([SpeakerListItem] -> Void)) {
         Alamofire.request(.GET, "\(host)/speakers.json", parameters: nil)
             .responseJSON { (response: Response<AnyObject, NSError>) -> Void in
