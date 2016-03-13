@@ -9,6 +9,9 @@
 import UIKit
 import Cosmos
 import AlamofireImage
+import YoutubeSourceParserKit
+import AVFoundation
+import AVKit
 
 class TalkDetailViewController: UIViewController {
     @IBOutlet weak var loadingView: UIStackView!
@@ -131,6 +134,52 @@ class TalkDetailViewController: UIViewController {
     
     override var preferredFocusedView: UIView? {
         return self.playButton
+    }
+    
+    @IBAction func playButtonTyped(sender: AnyObject) {
+        if let youtubeID = self.talkDetail?.youtubeVideoId {
+            var videoInfo = Youtube.h264videosWithYoutubeID(youtubeID)
+            if let videoURLString = videoInfo?["url"] as? String {
+                let asset = AVAsset(URL: NSURL(string: videoURLString)!)
+                let playerItem = AVPlayerItem(asset: asset)
+                    
+                let titleMetadata = AVMutableMetadataItem()
+                titleMetadata.key = AVMetadataCommonKeyTitle
+                titleMetadata.keySpace = AVMetadataKeySpaceCommon
+                titleMetadata.locale = NSLocale.currentLocale()
+                titleMetadata.value = self.talkDetail!.title
+                
+                let descriptionMetadata = AVMutableMetadataItem()
+                descriptionMetadata.key = AVMetadataCommonKeyDescription
+                descriptionMetadata.keySpace = AVMetadataKeySpaceCommon
+                descriptionMetadata.locale = NSLocale.currentLocale()
+                descriptionMetadata.value = self.talkDetail!.summary
+                
+                let genreMetadata = AVMutableMetadataItem()
+                genreMetadata.locale = NSLocale.currentLocale()
+                genreMetadata.identifier = AVMetadataIdentifierQuickTimeMetadataGenre
+                genreMetadata.value = self.talkDetail!.trackTitle
+                    
+                playerItem.externalMetadata = [titleMetadata, descriptionMetadata, genreMetadata]
+                    
+                if let image = self.thumbnailView.image {
+                    let artworkMetadata = AVMutableMetadataItem()
+                    artworkMetadata.locale = NSLocale.currentLocale()
+                    artworkMetadata.key = AVMetadataCommonKeyArtwork
+                    artworkMetadata.keySpace = AVMetadataKeySpaceCommon
+                    artworkMetadata.value = UIImageJPEGRepresentation(image, 1.0)
+                    playerItem.externalMetadata.append(artworkMetadata)
+                }
+                    
+                let player = AVPlayer(playerItem: playerItem)
+                let playerController = AVPlayerViewController()
+                playerController.player = player
+                self.presentViewController(playerController, animated: true, completion: { () -> Void in
+                    player.play()
+                })
+            }
+        }
+        
     }
 }
 

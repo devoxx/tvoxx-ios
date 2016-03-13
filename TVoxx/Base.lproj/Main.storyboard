@@ -539,6 +539,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="152" height="86"/>
                                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                                         <state key="normal" title="Play"/>
+                                                        <connections>
+                                                            <action selector="playButtonTyped:" destination="ggb-Lh-QMU" eventType="primaryActionTriggered" id="NAh-ay-0iM"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAq-Ds-8hw">
                                                         <rect key="frame" x="192" y="0.0" width="361" height="86"/>
