@@ -14,7 +14,7 @@ class TalkDetail: NSObject {
     var title:String
     var summary:String
     var summaryAsHtml:String
-    var trackTitle:String
+    var trackTitle:String?
     var lang:String
     var averageRating:Double?
     var numberOfRatings:Int?
@@ -30,7 +30,7 @@ class TalkDetail: NSObject {
         self.title = dict["title"] as! String
         self.summary = dict["summary"] as! String
         self.summaryAsHtml = dict["summaryAsHtml"] as! String
-        self.trackTitle = dict["trackTitle"] as! String
+        self.trackTitle = dict["trackTitle"] as? String
         self.lang = dict["lang"] as! String
         self.averageRating = dict["averageRating"] as? Double
         self.numberOfRatings = dict["numberOfRatings"] as? Int

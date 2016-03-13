@@ -34,6 +34,8 @@ class TalkDetailViewController: UIViewController {
     @IBOutlet weak var speakersCollectionView: UICollectionView!
     
     private var topFocusGuide = UIFocusGuide()
+    private var tapGestureRecognizer: UITapGestureRecognizer?
+    private var selectedSpeaker:SpeakerListItem?
     
     var talk: TalkListItem? {
         didSet {
@@ -52,6 +54,16 @@ class TalkDetailViewController: UIViewController {
 
         self.ratingView.settings.fillMode = .Precise
         self.setupFocus()
+        
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped:")
+        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
+        self.view.addGestureRecognizer(self.tapGestureRecognizer!)
+    }
+    
+    func tapped(sender:UITapGestureRecognizer) {
+        if sender.state == .Ended {
+            self.play()
+        }
     }
     
     private func setupFocus() {
@@ -137,12 +149,24 @@ class TalkDetailViewController: UIViewController {
     }
     
     @IBAction func playButtonTyped(sender: AnyObject) {
+        self.play()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showSpeakerDetail" {
+            if let speakerDetailViewController = segue.destinationViewController as? SpeakerDetailViewController, selectedSpeaker = self.selectedSpeaker {
+                speakerDetailViewController.speaker = selectedSpeaker
+            }
+        }
+    }
+    
+    private func play() {
         if let youtubeID = self.talkDetail?.youtubeVideoId {
             var videoInfo = Youtube.h264videosWithYoutubeID(youtubeID)
             if let videoURLString = videoInfo?["url"] as? String {
                 let asset = AVAsset(URL: NSURL(string: videoURLString)!)
                 let playerItem = AVPlayerItem(asset: asset)
-                    
+                
                 let titleMetadata = AVMutableMetadataItem()
                 titleMetadata.key = AVMetadataCommonKeyTitle
                 titleMetadata.keySpace = AVMetadataKeySpaceCommon
@@ -155,13 +179,16 @@ class TalkDetailViewController: UIViewController {
                 descriptionMetadata.locale = NSLocale.currentLocale()
                 descriptionMetadata.value = self.talkDetail!.summary
                 
-                let genreMetadata = AVMutableMetadataItem()
-                genreMetadata.locale = NSLocale.currentLocale()
-                genreMetadata.identifier = AVMetadataIdentifierQuickTimeMetadataGenre
-                genreMetadata.value = self.talkDetail!.trackTitle
-                    
-                playerItem.externalMetadata = [titleMetadata, descriptionMetadata, genreMetadata]
-                    
+                playerItem.externalMetadata = [titleMetadata, descriptionMetadata]
+                
+                if let track = self.talkDetail?.trackTitle {
+                    let genreMetadata = AVMutableMetadataItem()
+                    genreMetadata.locale = NSLocale.currentLocale()
+                    genreMetadata.identifier = AVMetadataIdentifierQuickTimeMetadataGenre
+                    genreMetadata.value = track
+                    playerItem.externalMetadata.append(genreMetadata)
+                }
+                
                 if let image = self.thumbnailView.image {
                     let artworkMetadata = AVMutableMetadataItem()
                     artworkMetadata.locale = NSLocale.currentLocale()
@@ -170,7 +197,7 @@ class TalkDetailViewController: UIViewController {
                     artworkMetadata.value = UIImageJPEGRepresentation(image, 1.0)
                     playerItem.externalMetadata.append(artworkMetadata)
                 }
-                    
+                
                 let player = AVPlayer(playerItem: playerItem)
                 let playerController = AVPlayerViewController()
                 playerController.player = player
@@ -179,7 +206,6 @@ class TalkDetailViewController: UIViewController {
                 })
             }
         }
-        
     }
 }
 
@@ -228,5 +254,8 @@ extension TalkDetailViewController: UICollectionViewDataSource {
 }
 
 extension TalkDetailViewController: UICollectionViewDelegate {
-    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.selectedSpeaker = self.talkDetail?.speakers[indexPath.row]
+        self.performSegueWithIdentifier("showSpeakerDetail", sender: self)
+    }
 }

@@ -8,6 +8,9 @@
 
 import UIKit
 import Cosmos
+import YoutubeSourceParserKit
+import AVKit
+import AVFoundation
 
 class TalkCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel:UILabel!
@@ -36,6 +39,52 @@ class TalkCollectionViewCell: UICollectionViewCell {
                 self.titleLabel.textColor = UIColor.whiteColor()
                 self.titleLabel.frame.origin.y -= 40
                 }, completion: nil)
+        }
+    }
+    
+    func play() -> AVPlayer? {
+        let talk = self.talk!
+        
+        var videoInfo = Youtube.h264videosWithYoutubeID(talk.youtubeVideoId)
+        if let videoURLString = videoInfo?["url"] as? String {
+            let asset = AVAsset(URL: NSURL(string: videoURLString)!)
+            let playerItem = AVPlayerItem(asset: asset)
+            
+            let titleMetadata = AVMutableMetadataItem()
+            titleMetadata.key = AVMetadataCommonKeyTitle
+            titleMetadata.keySpace = AVMetadataKeySpaceCommon
+            titleMetadata.locale = NSLocale.currentLocale()
+            titleMetadata.value = talk.title
+            
+            let descriptionMetadata = AVMutableMetadataItem()
+            descriptionMetadata.key = AVMetadataCommonKeyDescription
+            descriptionMetadata.keySpace = AVMetadataKeySpaceCommon
+            descriptionMetadata.locale = NSLocale.currentLocale()
+            descriptionMetadata.value = talk.summary
+            
+            playerItem.externalMetadata = [titleMetadata, descriptionMetadata]
+            
+            if let track = talk.trackTitle {
+                let genreMetadata = AVMutableMetadataItem()
+                genreMetadata.locale = NSLocale.currentLocale()
+                genreMetadata.identifier = AVMetadataIdentifierQuickTimeMetadataGenre
+                genreMetadata.value = track
+                playerItem.externalMetadata.append(genreMetadata)
+            }
+            
+            if let image = self.imageView.image {
+                let artworkMetadata = AVMutableMetadataItem()
+                artworkMetadata.locale = NSLocale.currentLocale()
+                artworkMetadata.key = AVMetadataCommonKeyArtwork
+                artworkMetadata.keySpace = AVMetadataKeySpaceCommon
+                artworkMetadata.value = UIImageJPEGRepresentation(image, 1.0)
+                playerItem.externalMetadata.append(artworkMetadata)
+            }
+            
+            let player = AVPlayer(playerItem: playerItem)
+            return player
+        } else {
+            return nil
         }
     }
 }

@@ -8,6 +8,8 @@
 
 import UIKit
 import AlamofireImage
+import AVKit
+import AVFoundation
 
 class SpeakerDetailViewController: UIViewController {
     @IBOutlet weak var loadingView:UIStackView!
@@ -32,11 +34,29 @@ class SpeakerDetailViewController: UIViewController {
         }
     }
     private var speakerDetail:SpeakerDetail?
+    private var tapGestureRecognizer:UITapGestureRecognizer?
+    private var selectedTalk:TalkListItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped:")
+        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
+        self.view.addGestureRecognizer(self.tapGestureRecognizer!)
+    }
+    
+    func tapped(sender:UITapGestureRecognizer) {
+        if sender.state == .Ended {
+            if let focusedCell = UIScreen.mainScreen().focusedView as? TalkCollectionViewCell {
+                if let player = focusedCell.play() {
+                    let playerController = AVPlayerViewController()
+                    playerController.player = player
+                    self.presentViewController(playerController, animated: true, completion: { () -> Void in
+                        player.play()
+                    })
+                }
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -79,19 +99,16 @@ class SpeakerDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
+    }    
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showTalkDetail" {
+            if let talkDetailViewController = segue.destinationViewController as? TalkDetailViewController {
+                talkDetailViewController.talk = self.selectedTalk
+            }
+        }
     }
-    */
-
 }
 
 extension SpeakerDetailViewController: UICollectionViewDataSource {
@@ -127,5 +144,8 @@ extension SpeakerDetailViewController: UICollectionViewDataSource {
 }
 
 extension SpeakerDetailViewController: UICollectionViewDelegate {
-    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.selectedTalk = self.speakerDetail?.talks[indexPath.row]
+        self.performSegueWithIdentifier("showTalkDetail", sender: self)
+    }
 }

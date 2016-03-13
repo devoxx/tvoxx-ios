@@ -28,7 +28,7 @@
 		<true/>
 	</dict>
 	<key>TVOXX_SERVER</key>
-	<string>http://devoxx-proxy.cfapps.io//api</string>
+	<string>http://devoxx-proxy.cfapps.io/api</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

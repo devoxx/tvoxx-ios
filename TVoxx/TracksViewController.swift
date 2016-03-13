@@ -17,15 +17,33 @@ class TracksViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     private var tracks = [Track]()
-    var selectedTalk: TalkListItem?
+    private var selectedTalk: TalkListItem?
+    private var tapGestureRecognizer: UIGestureRecognizer?
     
     private var selectionObserver:AnyObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped:")
+        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
+        self.view.addGestureRecognizer(self.tapGestureRecognizer!)
     }
 
+    func tapped(sender:UITapGestureRecognizer) {
+        if sender.state == .Ended {
+            if let focusedCell = UIScreen.mainScreen().focusedView as? TalkCollectionViewCell {
+                if let player = focusedCell.play() {
+                    let playerController = AVPlayerViewController()
+                    playerController.player = player
+                    self.presentViewController(playerController, animated: true, completion: { () -> Void in
+                        player.play()
+                    })
+                }
+            }
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
