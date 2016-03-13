@@ -73,7 +73,11 @@ class SpeakerDetailViewController: UIViewController {
             TVoxxServer.sharedServer.getSpeakerWithUuid(speaker.uuid) { (speakerDetail: SpeakerDetail) in
                 self.speakerDetail = speakerDetail
                 self.nameLabel.text = speakerDetail.firstName + " " + speakerDetail.lastName
-                self.companyLabel.text = speakerDetail.company
+                if let company = speakerDetail.company {
+                    self.companyLabel.text = company
+                } else {
+                    self.companyLabel.text = ""
+                }
                 self.bioLabel.text = speakerDetail.bio
                 self.languageLabel.text = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: speakerDetail.lang)
                 if let avatarUrl = speakerDetail.avatarUrl {

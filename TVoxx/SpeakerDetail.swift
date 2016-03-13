@@ -15,7 +15,7 @@ class SpeakerDetail: NSObject {
     var avatarUrl:String?
     var bio:String
     var bioAsHtml:String
-    var company:String
+    var company:String?
     var lang:String
     var blog:String?
     var twitter:String?
@@ -28,7 +28,7 @@ class SpeakerDetail: NSObject {
         self.avatarUrl = dict["avatarUrl"] as? String
         self.bio = dict["bio"] as! String
         self.bioAsHtml = dict["bioAsHtml"] as! String
-        self.company = dict["company"] as! String
+        self.company = dict["company"] as? String
         self.lang = dict["lang"] as! String
         self.blog = dict["blog"] as? String
         self.twitter = dict["twitter"] as? String
