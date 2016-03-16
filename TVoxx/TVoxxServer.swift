@@ -90,4 +90,46 @@ class TVoxxServer: NSObject {
                 }
         }
     }
+    
+    /*func getTopTalks() -> [TalkListItem] {
+        let semaphore = dispatch_semaphore_create(0)
+        var rsp: Response<AnyObject, NSError>!
+        Alamofire.request(.GET, "\(host)/talks/top.json", parameters: ["withVideo":"true", "count":"10"]).responseJSON { (response: Response<AnyObject, NSError>) -> Void in
+            rsp = response
+            dispatch_semaphore_signal(semaphore);
+        }
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        
+        if let JSON = rsp.result.value as? [Dictionary<String, AnyObject>] {
+            var talks = [TalkListItem]()
+            for talkDict in JSON {
+                if (talkDict["thumbnailUrl"] as? String) != nil {
+                    talks.append(TalkListItem(withDictionary: talkDict))
+                }
+            }
+            return talks
+        } else {
+            return [TalkListItem]()
+        }
+    }*/
+    
+    func getTopTalks(callback:([TalkListItem]->Void)) {
+        Alamofire.request(.GET, "\(host)/talks/top", parameters: ["withVideo":"true", "count":"10"]).responseJSON { (response: Response<AnyObject, NSError>) -> Void in
+            if let JSON = response.result.value as? [Dictionary<String, AnyObject>] {
+                var talks = [TalkListItem]()
+                for talkDict in JSON {
+                    if (talkDict["thumbnailUrl"] as? String) != nil {
+                        talks.append(TalkListItem(withDictionary: talkDict))
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    callback(talks)
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    callback([TalkListItem]())
+                })
+            }
+        }
+    }
 }

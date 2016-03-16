@@ -16,3 +16,9 @@ target 'TVoxxUITests' do
 
 end
 
+target 'TVoxxTopShelf' do
+    pod 'Alamofire', '~> 3.1'
+    pod 'AlamofireImage', '~> 2.1'
+    pod 'Cosmos', '~> 1.2'
+    pod 'YoutubeSourceParserKit', '~> 0.2'
+end
