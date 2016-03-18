@@ -116,6 +116,29 @@ extension TracksViewController : UICollectionViewDataSource {
             return UICollectionReusableView()
         }
     }
+    
+    func openTalkWithTalkId(talkId:String, play:Bool) {
+        TVoxxServer.sharedServer.getTalkWithTalkId(talkId, callback: { (talk:TalkDetail) -> Void in
+            if self.presentedViewController != nil {
+                self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                    self.showTalkDetailForTalk(talk, play: play)
+                })
+            } else {
+                self.showTalkDetailForTalk(talk, play: play)
+            }
+        })
+    }
+    
+    private func showTalkDetailForTalk(talk:TalkDetail, play:Bool) {
+        if let talkDetailController = self.storyboard?.instantiateViewControllerWithIdentifier("TalkDetailViewController") as? TalkDetailViewController {
+            self.presentViewController(talkDetailController, animated: false, completion: { () -> Void in
+                talkDetailController.talkDetail = talk
+                if play {
+                    talkDetailController.play()
+                }
+            })
+        }
+    }
 }
 
 extension TracksViewController : UICollectionViewDelegate {

@@ -48,33 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.host == "talks" {
             if let components = url.pathComponents where components.count > 1 {
                 let talkId = components[1]
-                TVoxxServer.sharedServer.getTalkWithTalkId(talkId, callback: { (talk:TalkDetail) -> Void in
-                    if let tabController = self.window?.rootViewController as? UITabBarController {
-                        tabController.selectedIndex = 0
-                        tabController.selectedIndex = 0
-                        if let tracksController = tabController.childViewControllers[0] as? TracksViewController {
-                            if tracksController.presentedViewController != nil {
-                                tracksController.dismissViewControllerAnimated(false, completion: { () -> Void in
-                                    if let talkDetailController = tracksController.storyboard?.instantiateViewControllerWithIdentifier("TalkDetailViewController") as? TalkDetailViewController {
-                                        tracksController.presentViewController(talkDetailController, animated: false, completion: { () -> Void in
-                                            talkDetailController.talkDetail = talk
-                                            
-                                            if components.count > 2 && components[2] == "play" {
-                                                talkDetailController.play()
-                                            }
-                                        })
-                                    }
-                                })
-                            } else {
-                                if let talkDetailController = tracksController.storyboard?.instantiateViewControllerWithIdentifier("TalkDetailViewController") as? TalkDetailViewController {
-                                    tracksController.presentViewController(talkDetailController, animated: false, completion: { () -> Void in
-                                        talkDetailController.talkDetail = talk
-                                    })
-                                }
-                            }
-                        }
+                
+                if let tabController = self.window?.rootViewController as? UITabBarController {
+                    tabController.selectedIndex = 0
+                    if let tracksController = tabController.childViewControllers[0] as? TracksViewController {
+                        tracksController.openTalkWithTalkId(talkId, play: (components.count > 2 && components[2] == "play"))
                     }
-                })
+                }
             }
         }
         return true
