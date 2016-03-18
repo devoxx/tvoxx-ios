@@ -47,7 +47,36 @@ class TalkDetailViewController: UIViewController {
             }
         }
     }
-    private var talkDetail:TalkDetail?
+    var talkDetail:TalkDetail? {
+        didSet {
+            if let talkDetail = self.talkDetail {
+                self.titleLabel.text = talkDetail.title
+                self.formatLabel.text = talkDetail.talkType
+                self.conferenceLabel.text = talkDetail.conferenceLabel.stringByReplacingOccurrencesOfString(", ", withString: ",\n")
+                self.trackLabel.text = talkDetail.trackTitle
+                if let rating = talkDetail.averageRating {
+                    self.ratingView.rating = rating
+                    self.ratingLabel.text = String(format: NSLocalizedString("Out of %d votes", comment:""), talkDetail.numberOfRatings!)
+                    self.ratingGroup.hidden = false
+                } else {
+                    self.ratingGroup.hidden = true
+                }
+                self.abstractLabel.text = talkDetail.summary
+                self.languageLabel.text = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: talkDetail.lang)
+                self.thumbnailView.af_setImageWithURL(NSURL(string: talkDetail.thumbnailUrl)!, placeholderImage: UIImage(named: "talk"))
+                
+                self.durationLabel.text = Utils.formatDuration(talkDetail.durationInSeconds)
+                
+                self.speakersCollectionView.reloadData()
+                
+                self.loadingView.hidden = true
+                self.loadingLabel.hidden = true
+                self.titleLabel.hidden = false
+                self.detailView.hidden = false
+                self.speakersCollectionView.hidden = false
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,30 +116,6 @@ class TalkDetailViewController: UIViewController {
             self.loadingIndicator.startAnimating()
             TVoxxServer.sharedServer.getTalkWithTalkId(talk.talkId) { (talkDetail: TalkDetail) in
                 self.talkDetail = talkDetail
-                self.titleLabel.text = talkDetail.title
-                self.formatLabel.text = talkDetail.talkType
-                self.conferenceLabel.text = talkDetail.conferenceLabel.stringByReplacingOccurrencesOfString(", ", withString: ",\n")
-                self.trackLabel.text = talkDetail.trackTitle
-                if let rating = talkDetail.averageRating {
-                    self.ratingView.rating = rating
-                    self.ratingLabel.text = String(format: NSLocalizedString("Out of %d votes", comment:""), talkDetail.numberOfRatings!)
-                    self.ratingGroup.hidden = false
-                } else {
-                    self.ratingGroup.hidden = true
-                }
-                self.abstractLabel.text = talkDetail.summary
-                self.languageLabel.text = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: talkDetail.lang)
-                self.thumbnailView.af_setImageWithURL(NSURL(string: talkDetail.thumbnailUrl)!, placeholderImage: UIImage(named: "talk"))
-                
-                self.durationLabel.text = Utils.formatDuration(talkDetail.durationInSeconds)
-                
-                self.speakersCollectionView.reloadData()
-                
-                self.loadingView.hidden = true
-                self.loadingLabel.hidden = true
-                self.titleLabel.hidden = false
-                self.detailView.hidden = false
-                self.speakersCollectionView.hidden = false
             }
         } else {
             self.loadingView.hidden = true
@@ -160,7 +165,7 @@ class TalkDetailViewController: UIViewController {
         }
     }
     
-    private func play() {
+    func play() {
         if let youtubeID = self.talkDetail?.youtubeVideoId {
             var videoInfo = Youtube.h264videosWithYoutubeID(youtubeID)
             if let videoURLString = videoInfo?["url"] as? String {

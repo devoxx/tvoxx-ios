@@ -36,6 +36,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
                 
                 contentItem.title = talk.title
                 contentItem.displayURL = NSURL(string:"tvoxx://talks/\(talk.talkId)")
+                contentItem.playURL = NSURL(string: "tvoxx://talks/\(talk.talkId)/play")
                 contentItem.imageURL = NSURL(string: talk.thumbnailUrl)
                 contentItem.imageShape = TVContentItemImageShape.HDTV
                 
