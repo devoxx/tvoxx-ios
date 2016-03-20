@@ -16,9 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        self.configureSearchTab()
+        
         if let options = launchOptions, url = options[UIApplicationLaunchOptionsURLKey] as? NSURL, opt = options[UIApplicationLaunchOptionsURLKey] as? [String: AnyObject]{
             self.application(application, openURL: url, options: opt)
         }
+        
         return true
     }
 
@@ -58,6 +61,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         return true
+    }
+    
+    private func configureSearchTab() {
+        let tabBarController = self.window?.rootViewController as! UITabBarController
+        let resultsController = tabBarController.storyboard?.instantiateViewControllerWithIdentifier("SearchResultsViewController") as! SearchResultsViewController
+        let searchController = UISearchController(searchResultsController: resultsController)
+        searchController.searchResultsUpdater = resultsController
+        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        searchController.searchBar.placeholder = NSLocalizedString("Search talks", comment: "")
+        let grayColor = UIColor(red: 47.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0)
+        searchController.searchBar.tintColor = grayColor
+        searchController.searchBar.barTintColor = grayColor
+        searchController.searchBar.searchBarStyle = .Minimal
+        searchController.searchBar.keyboardAppearance = UIKeyboardAppearance.Dark
+        /*searchController.searchBar.scopeButtonTitles = [
+            NSLocalizedString("Talks", comment: ""),
+            NSLocalizedString("Speakers", comment: "")
+        ]
+        searchController.searchBar.selectedScopeButtonIndex = 0
+        searchController.searchBar.showsScopeBar = true*/
+        
+        let searchContainerViewController = UISearchContainerViewController(searchController: searchController)
+        let navigationController = UINavigationController(rootViewController: searchContainerViewController)
+        navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.Search, tag: 0)
+        if var viewControllers = tabBarController.viewControllers {
+            viewControllers.append(navigationController)
+            tabBarController.viewControllers = viewControllers
+            self.window?.rootViewController = tabBarController
+            self.window?.makeKeyAndVisible()
+        }
     }
 }
 

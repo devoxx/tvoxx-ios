@@ -132,4 +132,24 @@ class TVoxxServer: NSObject {
             }
         }
     }
+    
+    func searchForText(text:String, callback:([TalkListItem] -> Void)) {
+        Alamofire.request(.GET, "\(host)/talks/search", parameters: ["withVideo":"true", "q":text]).responseJSON { (response: Response<AnyObject, NSError>) -> Void in
+            if let JSON = response.result.value as? [Dictionary<String, AnyObject>] {
+                var talks = [TalkListItem]()
+                for talkDict in JSON {
+                    if (talkDict["thumbnailUrl"] as? String) != nil {
+                        talks.append(TalkListItem(withDictionary: talkDict))
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    callback(talks)
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    callback([TalkListItem]())
+                })
+            }
+        }
+    }
 }
