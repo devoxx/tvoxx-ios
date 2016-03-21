@@ -55,7 +55,7 @@ class SearchResultsViewController: UIViewController {
 
 extension SearchResultsViewController : UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text where searchText.characters.count > 0 {
+        if let searchText = searchController.searchBar.text where searchText.characters.count >= 3 {
             self.noResultLabel.hidden = true
             self.loadingIndicator.startAnimating()
             self.loadingView.hidden = false
@@ -72,6 +72,7 @@ extension SearchResultsViewController : UISearchResultsUpdating {
             })
         } else {
             self.searchResults = [TalkListItem]()
+            self.collectionView.reloadData()
         }
     }
 }
