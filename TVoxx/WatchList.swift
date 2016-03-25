@@ -62,7 +62,7 @@ class WatchList: NSObject {
                     callback(nil, WatchListError.NotAuthenticated)
                 })
             } else {
-                let query = CKQuery(recordType: "Talk", predicate: NSPredicate(format: ""))
+                let query = CKQuery(recordType: "Talk", predicate: NSPredicate(value: true))
                 CKContainer.defaultContainer().privateCloudDatabase.performQuery(query, inZoneWithID: nil, completionHandler: { (records:[CKRecord]?, error:NSError?) in
                     if let error = error {
                         dispatch_async(dispatch_get_main_queue(), {
