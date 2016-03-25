@@ -12,6 +12,7 @@ import AlamofireImage
 import YoutubeSourceParserKit
 import AVFoundation
 import AVKit
+import FontAwesome_swift
 
 class TalkDetailViewController: UIViewController {
     @IBOutlet weak var loadingView: UIStackView!
@@ -32,6 +33,11 @@ class TalkDetailViewController: UIViewController {
     @IBOutlet weak var addToWatchlistButton: UIButton!
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var speakersCollectionView: UICollectionView!
+    @IBOutlet weak var playView:UIStackView!
+    @IBOutlet weak var watchListView:UIStackView!
+    @IBOutlet weak var playLabel:UILabel!
+    @IBOutlet weak var watchListLabel:UILabel!
+    @IBOutlet weak var watchListLoadingView:UIView!
     
     private var topFocusGuide = UIFocusGuide()
     private var tapGestureRecognizer: UITapGestureRecognizer?
@@ -74,17 +80,24 @@ class TalkDetailViewController: UIViewController {
                 self.titleLabel.hidden = false
                 self.detailView.hidden = false
                 self.speakersCollectionView.hidden = false
+                
+                self.updateWatchListButton()
             }
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.addToWatchlistButton.titleLabel?.font = UIFont.fontAwesomeOfSize(40)
+        self.playButton.titleLabel?.font = UIFont.fontAwesomeOfSize(40)
+        self.playButton.setTitle(String.fontAwesomeIconWithName(.Play), forState: .Normal)
+        self.playLabel.text = NSLocalizedString("Play", comment: "") + "\n "
+        
         self.ratingView.settings.fillMode = .Precise
         self.setupFocus()
         
-        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped:")
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TalkDetailViewController.tapped(_:)))
         self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
         self.view.addGestureRecognizer(self.tapGestureRecognizer!)
     }
@@ -121,6 +134,8 @@ class TalkDetailViewController: UIViewController {
             self.loadingView.hidden = true
             self.loadingLabel.text = NSLocalizedString("No talk to load", comment: "")
         }
+        
+        self.updateWatchListButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -155,6 +170,95 @@ class TalkDetailViewController: UIViewController {
     
     @IBAction func playButtonTyped(sender: AnyObject) {
         self.play()
+    }
+    
+    @IBAction func watchlistButtonTyped(sender: AnyObject) {
+        if let talkDetail = self.talkDetail {
+            WatchList.sharedWatchList.isTalkAlreadyInWatchList(talkDetail){ (result:Bool?, error:WatchListError?) in
+                if let error = error {
+                    switch error {
+                    case .NotAuthenticated:
+                        self.showAuthenticationError()
+                    case .BackendError(let rootCause):
+                        self.showBackendError(rootCause)
+                    }
+                } else {
+                    if result! {
+                        WatchList.sharedWatchList.removeTalkFromWatchList(talkDetail) { (error:WatchListError?) in
+                            if let error = error {
+                                switch error {
+                                case .NotAuthenticated:
+                                    self.showAuthenticationError()
+                                case .BackendError(let rootCause):
+                                    self.showBackendError(rootCause)
+                                }
+                            }
+                            self.updateWatchListButton()
+                        }
+                    } else {
+                        WatchList.sharedWatchList.addTalkToWatchList(talkDetail) { (error:WatchListError?) in
+                            if let error = error {
+                                switch error {
+                                case .NotAuthenticated:
+                                    self.showAuthenticationError()
+                                case .BackendError(let rootCause):
+                                    self.showBackendError(rootCause)
+                                }
+                            }
+                            self.updateWatchListButton()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateWatchListButton() {
+        if let talkDetail = self.talkDetail {
+            self.watchListView.hidden = true
+            self.watchListLoadingView.hidden = false
+            WatchList.sharedWatchList.isTalkAlreadyInWatchList(talkDetail){ (result:Bool?, error:WatchListError?) in
+                self.watchListLoadingView.hidden = true
+                if let error = error {
+                    self.watchListView.hidden = true
+                    switch error {
+                    case .NotAuthenticated:
+                        self.showAuthenticationError()
+                    case .BackendError(let rootCause):
+                        self.showBackendError(rootCause)
+                    }
+                } else {
+                    if result! {
+                        self.addToWatchlistButton.setTitle(String.fontAwesomeIconWithName(.MinusCircle), forState: .Normal)
+                        self.watchListLabel.text = NSLocalizedString("Remove from\nwatchlist", comment: "")
+                    } else {
+                        self.addToWatchlistButton.setTitle(String.fontAwesomeIconWithName(.PlusCircle), forState: .Normal)
+                        self.watchListLabel.text = NSLocalizedString("Add to\nwatchlist", comment: "")
+                    }
+                    self.watchListView.hidden = false
+                }
+                
+            }
+        } else {
+            self.watchListView.hidden = true
+        }
+    }
+    
+    private func showBackendError(rootCause:NSError) {
+        print(rootCause.debugDescription)
+        let alert = UIAlertController(title: NSLocalizedString("Error while adding this talk to your watchlist", comment: ""),
+                                      message: NSLocalizedString("Unknown error. Please try again later.", comment: ""),
+                                      preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    private func showAuthenticationError() {
+        let alert = UIAlertController(title: NSLocalizedString("Error while adding this talk to your watchlist", comment: ""),
+                                      message: NSLocalizedString("You need to sign in to your iCloud account in order to add talks to your watch list. On the Home screen, launch Settings, tap Accounts, then tap iCloud, and enter your Apple ID. Turn iCloud Drive on. If you don't have an iCloud account, tap Create a new Apple ID.", comment: ""),
+                                      preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

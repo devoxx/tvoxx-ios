@@ -40,7 +40,7 @@ class SpeakerDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped:")
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SpeakerDetailViewController.tapped(_:)))
         self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
         self.view.addGestureRecognizer(self.tapGestureRecognizer!)
     }

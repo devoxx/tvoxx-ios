@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class TalkListItem: NSObject {
     var talkId:String
@@ -30,5 +31,16 @@ class TalkListItem: NSObject {
             self.speakerNames = speakers
         }
         self.averageRating = dict["averageRating"] as? Double
+    }
+    
+    init(withRecord record:CKRecord){
+        self.summary = record["summary"] as! String
+        self.talkId = record["talkId"] as! String
+        self.title = record["title"] as! String
+        self.trackTitle = record["trackTitle"] as? String
+        self.thumbnailUrl = record["thumbnailUrl"] as! String
+        self.youtubeVideoId = record["youtubeVideoId"] as! String
+        self.speakerNames = [String]()
+        self.averageRating = (record["averageRating"] as! NSNumber).doubleValue
     }
 }

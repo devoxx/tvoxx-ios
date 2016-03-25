@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class TalkDetail: NSObject {
     var talkId:String
@@ -23,6 +24,25 @@ class TalkDetail: NSObject {
     var conferenceLabel:String
     var speakers:[SpeakerListItem]
     var durationInSeconds:Int
+    
+    var record:CKRecord {
+        let recordId = CKRecordID(recordName: self.talkId)
+        let talkRecord = CKRecord(recordType: "Talk", recordID: recordId)
+        talkRecord["talkId"] = self.talkId
+        talkRecord["title"] = self.title
+        talkRecord["thumbnailUrl"] = self.thumbnailUrl
+        talkRecord["talkType"] = self.talkType
+        talkRecord["summary"] = self.summary
+        talkRecord["summaryAsHtml"] = self.summaryAsHtml
+        talkRecord["trackTitle"] = self.trackTitle
+        talkRecord["lang"] = self.lang
+        talkRecord["averageRating"] = self.averageRating
+        talkRecord["numberOfRatings"] = self.numberOfRatings
+        talkRecord["youtubeVideoId"] = self.youtubeVideoId
+        talkRecord["conferenceLabel"] = self.conferenceLabel
+        talkRecord["durationInSeconds"] = self.durationInSeconds
+        return talkRecord
+    }
     
     init(withDictionary dict:[String: AnyObject]) {
         self.talkId = dict["talkId"] as! String

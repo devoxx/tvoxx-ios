@@ -32,6 +32,7 @@
 		B99FEADB1C99B83E00F7667A /* TalkListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98C9CF91C066401007A47DE /* TalkListItem.swift */; };
 		B99FEADC1C99B84100F7667A /* TalkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCB72B1C8C5D88001B2585 /* TalkDetail.swift */; };
 		B99FEADD1C99B84400F7667A /* SpeakerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AEA20F1C94C8D0005BC13B /* SpeakerDetail.swift */; };
+		B9A6A14B1CA036B000FE00DF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A6A14A1CA036B000FE00DF /* CloudKit.framework */; };
 		B9AEA2101C94C8D0005BC13B /* SpeakerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AEA20F1C94C8D0005BC13B /* SpeakerDetail.swift */; };
 		B9D13B101C0A878A00EB42DD /* SpeakerListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D13B0F1C0A878A00EB42DD /* SpeakerListItem.swift */; };
 		B9D13B121C0B2D7500EB42DD /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D13B111C0B2D7500EB42DD /* Track.swift */; };
@@ -45,6 +46,7 @@
 		B9F41D531C974DA000780B4A /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F41D521C974DA000780B4A /* ServiceProvider.swift */; };
 		B9F41D571C974DA000780B4A /* TVoxxTopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B9F41D4E1C974DA000780B4A /* TVoxxTopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B9F8114C1C94DBBE0099031F /* TalksCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F8114B1C94DBBE0099031F /* TalksCollectionReusableView.swift */; };
+		B9FE01011CA4396D009C4C62 /* WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE01001CA4396D009C4C62 /* WatchList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +126,8 @@
 		B98FF7721BFFDAC70095FFBC /* TVoxxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVoxxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98FF7761BFFDAC70095FFBC /* TVoxxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVoxxUITests.swift; sourceTree = "<group>"; };
 		B98FF7781BFFDAC70095FFBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9A6A1491CA036A000FE00DF /* TVoxx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TVoxx.entitlements; sourceTree = "<group>"; };
+		B9A6A14A1CA036B000FE00DF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B9AEA20F1C94C8D0005BC13B /* SpeakerDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetail.swift; sourceTree = "<group>"; };
 		B9D13B0F1C0A878A00EB42DD /* SpeakerListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerListItem.swift; sourceTree = "<group>"; };
 		B9D13B111C0B2D7500EB42DD /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 		B9F41D521C974DA000780B4A /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		B9F41D541C974DA000780B4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9F8114B1C94DBBE0099031F /* TalksCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalksCollectionReusableView.swift; sourceTree = "<group>"; };
+		B9FE01001CA4396D009C4C62 /* WatchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchList.swift; sourceTree = "<group>"; };
 		BB824B1776BB7ADC3A32CEF6 /* Pods-TVoxxUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVoxxUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVoxxUITests/Pods-TVoxxUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CF4B509857BA6A1C5BC23796 /* Pods-TVoxx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVoxx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVoxx/Pods-TVoxx.debug.xcconfig"; sourceTree = "<group>"; };
 		D2FD7D25B043B392BD9D7623 /* Pods-TVoxxTopShelf.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVoxxTopShelf.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVoxxTopShelf/Pods-TVoxxTopShelf.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9D8673C1C0675E900F89F58 /* AVFoundation.framework in Frameworks */,
+				B9A6A14B1CA036B000FE00DF /* CloudKit.framework in Frameworks */,
 				B9D8673D1C0675E900F89F58 /* AVKit.framework in Frameworks */,
 				B3BD22DD4C641A3120A5E8FA /* Pods_TVoxx.framework in Frameworks */,
 			);
@@ -202,6 +208,7 @@
 		A81E107644D8E995BA1C43D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B9A6A14A1CA036B000FE00DF /* CloudKit.framework */,
 				B9D8673A1C0675E900F89F58 /* AVFoundation.framework */,
 				B9D8673B1C0675E900F89F58 /* AVKit.framework */,
 				B9F41D4F1C974DA000780B4A /* TVServices.framework */,
@@ -253,6 +260,7 @@
 		B98FF7561BFFDAC70095FFBC /* TVoxx */ = {
 			isa = PBXGroup;
 			children = (
+				B9A6A1491CA036A000FE00DF /* TVoxx.entitlements */,
 				B96286AE1C878847006B4142 /* Domain */,
 				B98FF7601BFFDAC70095FFBC /* Assets.xcassets */,
 				B98FF7621BFFDAC70095FFBC /* Info.plist */,
@@ -270,6 +278,7 @@
 				B916F6961C948C0C0003E182 /* SpeakerDetailViewController.swift */,
 				B9F8114B1C94DBBE0099031F /* TalksCollectionReusableView.swift */,
 				B928CC311C9C84990026E007 /* SearchResultsViewController.swift */,
+				B9FE01001CA4396D009C4C62 /* WatchList.swift */,
 			);
 			path = TVoxx;
 			sourceTree = "<group>";
@@ -316,6 +325,7 @@
 				B9F41D6D1C974EF400780B4A /* Embed Frameworks */,
 				1480503FEC9B7D817D691C88 /* 📦 Embed Pods Frameworks */,
 				D37883EC41B38DF42C4E831F /* 📦 Copy Pods Resources */,
+				7C65E6D215CD6A62B2A6FE64 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -401,6 +411,11 @@
 					B98FF7531BFFDAC70095FFBC = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = HLAKBN9F84;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					B98FF7661BFFDAC70095FFBC = {
 						CreatedOnToolsVersion = 7.2;
@@ -531,6 +546,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TVoxxTests/Pods-TVoxxTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7C65E6D215CD6A62B2A6FE64 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TVoxx/Pods-TVoxx-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9D5F1D27759547A4D4411398 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -642,6 +672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9DCB72E1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift in Sources */,
+				B9FE01011CA4396D009C4C62 /* WatchList.swift in Sources */,
 				B96286B01C878A02006B4142 /* TrackCollectionViewCell.swift in Sources */,
 				B9D13B121C0B2D7500EB42DD /* Track.swift in Sources */,
 				B942BC201C9340E600957B11 /* SpeakersViewController.swift in Sources */,
@@ -812,6 +843,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = TVoxx/TVoxx.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
@@ -830,8 +862,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = TVoxx/TVoxx.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = TVoxx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -844,7 +877,6 @@
 		};
 		B98FF77F1BFFDAC70095FFBC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D56459534C5C7660672D9690 /* Pods-TVoxxTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TVoxxTests/Info.plist;
@@ -857,7 +889,6 @@
 		};
 		B98FF7801BFFDAC70095FFBC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 583540FA31A30FA484500274 /* Pods-TVoxxTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TVoxxTests/Info.plist;
@@ -870,7 +901,6 @@
 		};
 		B98FF7821BFFDAC70095FFBC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36C47CAE0885434EE7C5EB26 /* Pods-TVoxxUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = TVoxxUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -883,7 +913,6 @@
 		};
 		B98FF7831BFFDAC70095FFBC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB824B1776BB7ADC3A32CEF6 /* Pods-TVoxxUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = TVoxxUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
