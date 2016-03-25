@@ -13,6 +13,7 @@ import YoutubeSourceParserKit
 import AVFoundation
 import AVKit
 import FontAwesome_swift
+import TVServices
 
 class TalkDetailViewController: UIViewController {
     @IBOutlet weak var loadingView: UIStackView!
@@ -194,6 +195,7 @@ class TalkDetailViewController: UIViewController {
                                 }
                             }
                             self.updateWatchListButton()
+                            NSNotificationCenter.defaultCenter().postNotificationName(TVTopShelfItemsDidChangeNotification, object: nil)
                         }
                     } else {
                         WatchList.sharedWatchList.addTalkToWatchList(talkDetail) { (error:WatchListError?) in
@@ -206,6 +208,7 @@ class TalkDetailViewController: UIViewController {
                                 }
                             }
                             self.updateWatchListButton()
+                            NSNotificationCenter.defaultCenter().postNotificationName(TVTopShelfItemsDidChangeNotification, object: nil)
                         }
                     }
                 }

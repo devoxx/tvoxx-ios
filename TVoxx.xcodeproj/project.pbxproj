@@ -18,6 +18,8 @@
 		B942BC201C9340E600957B11 /* SpeakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B942BC1F1C9340E600957B11 /* SpeakersViewController.swift */; };
 		B948270B1CA585DA00012B13 /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B948270A1CA585DA00012B13 /* WatchlistViewController.swift */; };
 		B948270D1CA58D3F00012B13 /* UIViewController+WatchListErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B948270C1CA58D3E00012B13 /* UIViewController+WatchListErrors.swift */; };
+		B948270E1CA5919000012B13 /* WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE01001CA4396D009C4C62 /* WatchList.swift */; };
+		B94827101CA5948600012B13 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A6A14A1CA036B000FE00DF /* CloudKit.framework */; };
 		B96286B01C878A02006B4142 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96286AF1C878A02006B4142 /* TrackCollectionViewCell.swift */; };
 		B96286B21C878FBF006B4142 /* TalkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96286B11C878FBF006B4142 /* TalkCollectionViewCell.swift */; };
 		B96286B41C878FD7006B4142 /* TrackCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96286B31C878FD7006B4142 /* TrackCollectionReusableView.swift */; };
@@ -114,6 +116,7 @@
 		B942BC1F1C9340E600957B11 /* SpeakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersViewController.swift; sourceTree = "<group>"; };
 		B948270A1CA585DA00012B13 /* WatchlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
 		B948270C1CA58D3E00012B13 /* UIViewController+WatchListErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+WatchListErrors.swift"; sourceTree = "<group>"; };
+		B948270F1CA5945A00012B13 /* TVoxxTopShelf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TVoxxTopShelf.entitlements; sourceTree = "<group>"; };
 		B96286AF1C878A02006B4142 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		B96286B11C878FBF006B4142 /* TalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkCollectionViewCell.swift; sourceTree = "<group>"; };
 		B96286B31C878FD7006B4142 /* TrackCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -186,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B94827101CA5948600012B13 /* CloudKit.framework in Frameworks */,
 				B9F41D501C974DA000780B4A /* TVServices.framework in Frameworks */,
 				17CB9E58BF93FDAD1AE22DB1 /* Pods_TVoxxTopShelf.framework in Frameworks */,
 			);
@@ -227,6 +231,7 @@
 		B96286AE1C878847006B4142 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				B9FE01001CA4396D009C4C62 /* WatchList.swift */,
 				B90932661C066085008DD9B7 /* TVoxxServer.swift */,
 				B9D13B0F1C0A878A00EB42DD /* SpeakerListItem.swift */,
 				B9D13B111C0B2D7500EB42DD /* Track.swift */,
@@ -282,7 +287,6 @@
 				B916F6961C948C0C0003E182 /* SpeakerDetailViewController.swift */,
 				B9F8114B1C94DBBE0099031F /* TalksCollectionReusableView.swift */,
 				B928CC311C9C84990026E007 /* SearchResultsViewController.swift */,
-				B9FE01001CA4396D009C4C62 /* WatchList.swift */,
 				B948270A1CA585DA00012B13 /* WatchlistViewController.swift */,
 				B948270C1CA58D3E00012B13 /* UIViewController+WatchListErrors.swift */,
 			);
@@ -310,6 +314,7 @@
 		B9F41D511C974DA000780B4A /* TVoxxTopShelf */ = {
 			isa = PBXGroup;
 			children = (
+				B948270F1CA5945A00012B13 /* TVoxxTopShelf.entitlements */,
 				B9F41D521C974DA000780B4A /* ServiceProvider.swift */,
 				B9F41D541C974DA000780B4A /* Info.plist */,
 			);
@@ -434,6 +439,11 @@
 					B9F41D4D1C974DA000780B4A = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = HLAKBN9F84;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -727,6 +737,7 @@
 				B99FEAD91C99B83800F7667A /* SpeakerListItem.swift in Sources */,
 				B9F41D531C974DA000780B4A /* ServiceProvider.swift in Sources */,
 				B99FEADA1C99B83B00F7667A /* Track.swift in Sources */,
+				B948270E1CA5919000012B13 /* WatchList.swift in Sources */,
 				B99FEADC1C99B84100F7667A /* TalkDetail.swift in Sources */,
 				B99FEADB1C99B83E00F7667A /* TalkListItem.swift in Sources */,
 			);
@@ -935,6 +946,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1025217F9F93459C9A160CA /* Pods-TVoxxTopShelf.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TVoxxTopShelf/TVoxxTopShelf.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
@@ -950,6 +962,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D2FD7D25B043B392BD9D7623 /* Pods-TVoxxTopShelf.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TVoxxTopShelf/TVoxxTopShelf.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
