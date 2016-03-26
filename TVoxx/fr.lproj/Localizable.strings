@@ -9,8 +9,8 @@
 
 /* No comment provided by engineer. */
 "Add to
-watchlist" = "Regarder 
-plus tard";
+watchlist" = "Ajouter à
+ma liste";
 
 /* No comment provided by engineer. */
 "Could not find any speaker" = "Impossible de trouver des orateurs";
@@ -34,10 +34,10 @@ plus tard";
 "No speaker to load" = "Aucun orateur";
 
 /* No comment provided by engineer. */
-"No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\"" = "Aucune présentation dans votre liste. Pour en ajouter, rendez-vous dans les présentations et cliquez sur \"Regarder plus tard\"";
+"No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\"" = "Aucune présentation dans votre liste. Pour en ajouter, rendez-vous dans les présentations et cliquez sur \"Ajouter à ma liste\"";
 
 /* No comment provided by engineer. */
-"No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\"." = "Aucune présentation dans votre liste. Pour en ajouter, rendez-vous dans les présentations et cliquez sur \"Regarder plus tard\".";
+"No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\"." = "Aucune présentation dans votre liste. Pour en ajouter, rendez-vous dans les présentations et cliquez sur \"Ajouter à ma liste\".";
 
 /* No comment provided by engineer. */
 "No talk to load" = "Aucune présentation à charger";
@@ -53,8 +53,8 @@ plus tard";
 
 /* No comment provided by engineer. */
 "Remove from
-watchlist" = "Enlever de
-votre liste";
+watchlist" = "Retirer de
+ma liste";
 
 /* No comment provided by engineer. */
 "Search talks" = "Rechercher des présentations";
@@ -72,8 +72,8 @@ votre liste";
 "Unknown error. Please try again later." = "Erreur inconnue. Merci de réessayer plus tard.";
 
 /* No comment provided by engineer. */
-"Watchlist" = "A regarder plus tard";
+"Watchlist" = "Ma liste";
 
 /* No comment provided by engineer. */
-"You need to sign in to your iCloud account in order to use the watchlist feature. On the Home screen, launch Settings, tap Accounts, then tap iCloud, and enter your Apple ID. Turn iCloud Drive on. If you don't have an iCloud account, tap Create a new Apple ID." = "Vous devez vous connecter à votre compte iCloud pour utiliser la fonctionnalité \"A regarder plus tard\". Sur l'écran d'accueil, lancez \"Réglages\", cliquez sur Comptes, puis iCloud, et saisissez vos identifiants Apple. Activez iCloud Drive. Si vous n'avez pas de compte iCloud, cliquez sur Créer un nouvel identifiant Apple ID.";
+"You need to sign in to your iCloud account in order to use the watchlist feature. On the Home screen, launch Settings, tap Accounts, then tap iCloud, and enter your Apple ID. Turn iCloud Drive on. If you don't have an iCloud account, tap Create a new Apple ID." = "Vous devez vous connecter à votre compte iCloud pour utiliser la fonctionnalité \"Ma liste\". Sur l'écran d'accueil, lancez \"Réglages\", cliquez sur Comptes, puis iCloud, et saisissez vos identifiants Apple. Activez iCloud Drive. Si vous n'avez pas de compte iCloud, cliquez sur Créer un nouvel identifiant Apple ID.";
 

@@ -26,10 +26,10 @@
 "JAq-Ds-8hw.normalTitle" = "Ajouter";
 
 /* Class = "UILabel"; text = "Add to watchlist"; ObjectID = "JaD-3a-4Oa"; */
-"JaD-3a-4Oa.text" = "Regarder plus tard";
+"JaD-3a-4Oa.text" = "Ajouter à ma liste";
 
 /* Class = "UITabBarItem"; title = "Watchlist"; ObjectID = "Kzy-cl-rcx"; */
-"Kzy-cl-rcx.title" = "A regarder plus tard";
+"Kzy-cl-rcx.title" = "Ma Liste";
 
 /* Class = "UILabel"; text = "Talk title"; ObjectID = "MGg-ki-Vry"; */
 "MGg-ki-Vry.text" = "Titre de la présentation";
@@ -71,7 +71,7 @@
 "bpP-R3-hZG.text" = "Durée";
 
 /* Class = "UILabel"; text = "No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\"."; ObjectID = "e8V-VW-Gvl"; */
-"e8V-VW-Gvl.text" = "Aucune présentation à regarder plus tard. Pour en ajouter, rendez-vous dans le détail des présentations et cliquez sur \"Regarder plus tard\".";
+"e8V-VW-Gvl.text" = "Aucune présentation dans votre liste. Pour en ajouter, rendez-vous dans le détail des présentations et cliquez sur \"Ajouter à ma liste\".";
 
 /* Class = "UILabel"; text = "talk title"; ObjectID = "eK5-H6-FPq"; */
 "eK5-H6-FPq.text" = "titre de la présentation";
@@ -116,7 +116,7 @@
 "wO4-s3-mQs.text" = "nom de la conférence";
 
 /* Class = "UILabel"; text = "Watchlist"; ObjectID = "wY0-rQ-RtS"; */
-"wY0-rQ-RtS.text" = "A regarder plus tard";
+"wY0-rQ-RtS.text" = "Ma liste";
 
 /* Class = "UILabel"; text = "Format"; ObjectID = "xuh-kc-lR7"; */
 "xuh-kc-lR7.text" = "Format";
