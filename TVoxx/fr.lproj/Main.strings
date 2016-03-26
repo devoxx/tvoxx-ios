@@ -1,0 +1,126 @@
+/* Class = "UILabel"; text = "speaker name"; ObjectID = "0mR-nf-LJL"; */
+"0mR-nf-LJL.text" = "nom de l'orateur";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "1BM-0O-HLc"; */
+"1BM-0O-HLc.normalTitle" = "Lecture";
+
+/* Class = "UILabel"; text = "Loading..."; ObjectID = "3vO-fB-iRX"; */
+"3vO-fB-iRX.text" = "Chargement...";
+
+/* Class = "UILabel"; text = "Speakers"; ObjectID = "6oM-A8-T8e"; */
+"6oM-A8-T8e.text" = "Orateurs";
+
+/* Class = "UILabel"; text = "Loading..."; ObjectID = "7dC-8L-bYd"; */
+"7dC-8L-bYd.text" = "Chargement...";
+
+/* Class = "UILabel"; text = "No result found."; ObjectID = "8Ab-a9-Xki"; */
+"8Ab-a9-Xki.text" = "Aucun résultat.";
+
+/* Class = "UILabel"; text = "Loading..."; ObjectID = "Ct0-Vt-oqp"; */
+"Ct0-Vt-oqp.text" = "Chargement...";
+
+/* Class = "UILabel"; text = "Talks"; ObjectID = "EDj-Qt-tAR"; */
+"EDj-Qt-tAR.text" = "Présentations";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "JAq-Ds-8hw"; */
+"JAq-Ds-8hw.normalTitle" = "Ajouter";
+
+/* Class = "UILabel"; text = "Add to watchlist"; ObjectID = "JaD-3a-4Oa"; */
+"JaD-3a-4Oa.text" = "Regarder plus tard";
+
+/* Class = "UITabBarItem"; title = "Watchlist"; ObjectID = "Kzy-cl-rcx"; */
+"Kzy-cl-rcx.title" = "A regarder plus tard";
+
+/* Class = "UILabel"; text = "Talk title"; ObjectID = "MGg-ki-Vry"; */
+"MGg-ki-Vry.text" = "Titre de la présentation";
+
+/* Class = "UILabel"; text = "track title"; ObjectID = "Mbv-ho-Umb"; */
+"Mbv-ho-Umb.text" = "titre du thème";
+
+/* Class = "UITabBarItem"; title = "Speakers"; ObjectID = "OuV-60-0iq"; */
+"OuV-60-0iq.title" = "Orateurs";
+
+/* Class = "UILabel"; text = "Loading..."; ObjectID = "PjC-2f-cCz"; */
+"PjC-2f-cCz.text" = "Chargement...";
+
+/* Class = "UILabel"; text = "RATING"; ObjectID = "PmD-8J-i7l"; */
+"PmD-8J-i7l.text" = "NOTE";
+
+/* Class = "UILabel"; text = "CONFERENCE"; ObjectID = "QKz-Jq-dXA"; */
+"QKz-Jq-dXA.text" = "CONFERENCE";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Uhe-Jz-S6k"; */
+"Uhe-Jz-S6k.text" = "Titre";
+
+/* Class = "UILabel"; text = "Speakers"; ObjectID = "WT6-e7-Zz7"; */
+"WT6-e7-Zz7.text" = "Orateurs";
+
+/* Class = "UILabel"; text = "talk abstract"; ObjectID = "ZDF-E8-EYf"; */
+"ZDF-E8-EYf.text" = "résumé de la présentation";
+
+/* Class = "UILabel"; text = "speaker bio"; ObjectID = "ZbD-l9-oKc"; */
+"ZbD-l9-oKc.text" = "biographie de l'orateur";
+
+/* Class = "UITabBarItem"; title = "Talks"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Présentations";
+
+/* Class = "UILabel"; text = "Searching..."; ObjectID = "bJ4-Nu-Rjd"; */
+"bJ4-Nu-Rjd.text" = "Recherche...";
+
+/* Class = "UILabel"; text = "Duration"; ObjectID = "bpP-R3-hZG"; */
+"bpP-R3-hZG.text" = "Durée";
+
+/* Class = "UILabel"; text = "No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\"."; ObjectID = "e8V-VW-Gvl"; */
+"e8V-VW-Gvl.text" = "Aucune présentation à regarder plus tard. Pour en ajouter, rendez-vous dans le détail des présentations et cliquez sur \"Regarder plus tard\".";
+
+/* Class = "UILabel"; text = "talk title"; ObjectID = "eK5-H6-FPq"; */
+"eK5-H6-FPq.text" = "titre de la présentation";
+
+/* Class = "UILabel"; text = "track title"; ObjectID = "ft5-kT-QeP"; */
+"ft5-kT-QeP.text" = "titre du thème";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "lXZ-eU-Cd3"; */
+"lXZ-eU-Cd3.text" = "Nom";
+
+/* Class = "UILabel"; text = "Company"; ObjectID = "myx-ME-fmg"; */
+"myx-ME-fmg.text" = "Société";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "nRF-bf-B3R"; */
+"nRF-bf-B3R.text" = "Langue";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "ofr-ev-W5F"; */
+"ofr-ev-W5F.text" = "Langue";
+
+/* Class = "UILabel"; text = "talk title"; ObjectID = "p8a-ZR-hGw"; */
+"p8a-ZR-hGw.text" = "titre de la présentation";
+
+/* Class = "UILabel"; text = "Talks"; ObjectID = "qHh-MF-KDV"; */
+"qHh-MF-KDV.text" = "Présentations";
+
+/* Class = "UILabel"; text = "Out of X votes"; ObjectID = "rfl-8q-5nk"; */
+"rfl-8q-5nk.text" = "A partir de X votes";
+
+/* Class = "UILabel"; text = "Play"; ObjectID = "tw6-B5-F9U"; */
+"tw6-B5-F9U.text" = "Lecture";
+
+/* Class = "UILabel"; text = "TRACK"; ObjectID = "uZN-P5-qQR"; */
+"uZN-P5-qQR.text" = "THEME";
+
+/* Class = "UILabel"; text = "speaker name"; ObjectID = "vmH-GQ-N9C"; */
+"vmH-GQ-N9C.text" = "nom de l'orateur";
+
+/* Class = "UILabel"; text = "talk title"; ObjectID = "w4z-yu-Xrx"; */
+"w4z-yu-Xrx.text" = "titre de la présentation";
+
+/* Class = "UILabel"; text = "conference name"; ObjectID = "wO4-s3-mQs"; */
+"wO4-s3-mQs.text" = "nom de la conférence";
+
+/* Class = "UILabel"; text = "Watchlist"; ObjectID = "wY0-rQ-RtS"; */
+"wY0-rQ-RtS.text" = "A regarder plus tard";
+
+/* Class = "UILabel"; text = "Format"; ObjectID = "xuh-kc-lR7"; */
+"xuh-kc-lR7.text" = "Format";
+
+/* Class = "UILabel"; text = "Loading..."; ObjectID = "zb6-Mq-vsz"; */
+"zb6-Mq-vsz.text" = "Chargement...";
+
