@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class WatchlistViewController: UIViewController {
     @IBOutlet weak var loadingView: UIStackView!
@@ -16,6 +18,7 @@ class WatchlistViewController: UIViewController {
     @IBOutlet weak var emptyLabel:UILabel!
     private var talks = [TalkListItem]()
     private var selectedTalk:TalkListItem?
+    private var tapGestureRecognizer:UITapGestureRecognizer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,24 @@ class WatchlistViewController: UIViewController {
         self.emptyLabel.text = NSLocalizedString("No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\".", comment: "")
         self.emptyLabel.hidden = false
         self.loadingView.hidden = true
+        
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WatchlistViewController.tapped(_:)))
+        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
+        self.view.addGestureRecognizer(self.tapGestureRecognizer!)
+    }
+    
+    func tapped(sender:UITapGestureRecognizer) {
+        if sender.state == .Ended {
+            if let focusedCell = UIScreen.mainScreen().focusedView as? TalkCollectionViewCell {
+                if let player = focusedCell.play() {
+                    let playerController = AVPlayerViewController()
+                    playerController.player = player
+                    self.presentViewController(playerController, animated: true, completion: { () -> Void in
+                        player.play()
+                    })
+                }
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -36,15 +57,17 @@ class WatchlistViewController: UIViewController {
                 self.emptyLabel.hidden = false
                 switch error {
                 case .NotAuthenticated:
-                    self.showAuthenticationError()
+                    self.emptyLabel.text = NSLocalizedString("You need to sign in to your iCloud account in order to use the watchlist feature. On the Home screen, launch Settings, tap Accounts, then tap iCloud, and enter your Apple ID. Turn iCloud Drive on. If you don't have an iCloud account, tap Create a new Apple ID.", comment: "")
                 case .BackendError(let rootCause):
-                    self.showBackendError(rootCause)
+                    self.emptyLabel.text = NSLocalizedString("Impossible to load your watchlist", comment: "")
+                    NSLog("CloudKit error: " + rootCause.debugDescription)
                 }
             } else {
                 if let talks = talks where talks.count > 0 {
                     self.talks = talks
                 } else {
                     self.talks = [TalkListItem]()
+                    self.emptyLabel.text = NSLocalizedString("No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\"", comment:"")
                     self.emptyLabel.hidden = false
                 }
                 self.collectionView.reloadData()

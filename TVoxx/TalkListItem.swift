@@ -41,6 +41,6 @@ class TalkListItem: NSObject {
         self.thumbnailUrl = record["thumbnailUrl"] as! String
         self.youtubeVideoId = record["youtubeVideoId"] as! String
         self.speakerNames = [String]()
-        self.averageRating = (record["averageRating"] as! NSNumber).doubleValue
+        self.averageRating = (record["averageRating"] as? NSNumber)?.doubleValue
     }
 }

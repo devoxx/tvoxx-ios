@@ -63,7 +63,7 @@ class TalkDetailViewController: UIViewController {
                 self.trackLabel.text = talkDetail.trackTitle
                 if let rating = talkDetail.averageRating {
                     self.ratingView.rating = rating
-                    self.ratingLabel.text = String(format: NSLocalizedString("Out of %d votes", comment:""), talkDetail.numberOfRatings!)
+                    self.ratingLabel.text = String.localizedStringWithFormat(NSLocalizedString("Out of %d votes", comment:""), talkDetail.numberOfRatings!)
                     self.ratingGroup.hidden = false
                 } else {
                     self.ratingGroup.hidden = true
@@ -179,9 +179,9 @@ class TalkDetailViewController: UIViewController {
                 if let error = error {
                     switch error {
                     case .NotAuthenticated:
-                        self.showAuthenticationError()
+                        self.showAuthenticationError(NSLocalizedString("Impossible to access your watchlist", comment: ""))
                     case .BackendError(let rootCause):
-                        self.showBackendError(rootCause)
+                        self.showBackendError(rootCause, title: NSLocalizedString("Impossible to access your watchlist", comment: ""))
                     }
                 } else {
                     if result! {
@@ -189,9 +189,9 @@ class TalkDetailViewController: UIViewController {
                             if let error = error {
                                 switch error {
                                 case .NotAuthenticated:
-                                    self.showAuthenticationError()
+                                    self.showAuthenticationError(NSLocalizedString("Error while removing this talk from your watchlist", comment: ""))
                                 case .BackendError(let rootCause):
-                                    self.showBackendError(rootCause)
+                                    self.showBackendError(rootCause, title: NSLocalizedString("Error while removing this talk from your watchlist", comment: ""))
                                 }
                             }
                             self.updateWatchListButton()
@@ -202,9 +202,9 @@ class TalkDetailViewController: UIViewController {
                             if let error = error {
                                 switch error {
                                 case .NotAuthenticated:
-                                    self.showAuthenticationError()
+                                    self.showAuthenticationError(NSLocalizedString("Error while adding this talk to your watchlist", comment: ""))
                                 case .BackendError(let rootCause):
-                                    self.showBackendError(rootCause)
+                                    self.showBackendError(rootCause, title: NSLocalizedString("Error while adding this talk to your watchlist", comment: ""))
                                 }
                             }
                             self.updateWatchListButton()
@@ -226,9 +226,9 @@ class TalkDetailViewController: UIViewController {
                     self.watchListView.hidden = true
                     switch error {
                     case .NotAuthenticated:
-                        self.showAuthenticationError()
+                        NSLog("User is not authenticated")
                     case .BackendError(let rootCause):
-                        self.showBackendError(rootCause)
+                        NSLog("CloudKit error: " + rootCause.debugDescription)
                     }
                 } else {
                     if result! {
@@ -240,7 +240,6 @@ class TalkDetailViewController: UIViewController {
                     }
                     self.watchListView.hidden = false
                 }
-                
             }
         } else {
             self.watchListView.hidden = true
