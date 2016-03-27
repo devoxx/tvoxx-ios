@@ -22,7 +22,7 @@ class WatchList: NSObject {
     }
     
     private var container:CKContainer {
-        return CKContainer(identifier: "iCloud.com.epseelon.TVoxx")
+        return CKContainer(identifier: "iCloud.com.devoxx.TVoxx")
     }
     
     func isTalkAlreadyInWatchList(talk:TalkDetail, callback:(Bool?,WatchListError?) -> Void){

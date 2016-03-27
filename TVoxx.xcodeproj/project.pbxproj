@@ -440,7 +440,7 @@
 				TargetAttributes = {
 					B98FF7531BFFDAC70095FFBC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = HLAKBN9F84;
+						DevelopmentTeam = 7F9RT8TS76;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
@@ -457,7 +457,7 @@
 					};
 					B9F41D4D1C974DA000780B4A = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = HLAKBN9F84;
+						DevelopmentTeam = 7F9RT8TS76;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
@@ -943,7 +943,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = TVoxx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epseelon.TVoxx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devoxx.TVoxx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -962,7 +962,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = TVoxx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epseelon.TVoxx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devoxx.TVoxx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -975,7 +975,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TVoxxTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epseelon.TVoxxTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devoxx.TVoxxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TVoxx.app/TVoxx";
 			};
@@ -987,7 +987,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TVoxxTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epseelon.TVoxxTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devoxx.TVoxxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TVoxx.app/TVoxx";
 			};
@@ -998,7 +998,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = TVoxxUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epseelon.TVoxxUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devoxx.TVoxxUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = TVoxx;
 				USES_XCTRUNNER = YES;
@@ -1010,7 +1010,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = TVoxxUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epseelon.TVoxxUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devoxx.TVoxxUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = TVoxx;
 				USES_XCTRUNNER = YES;
@@ -1027,7 +1027,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TVoxxTopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epseelon.TVoxx.TVoxxTopShelf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devoxx.TVoxx.TVoxxTopShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -1043,7 +1043,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TVoxxTopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epseelon.TVoxx.TVoxxTopShelf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devoxx.TVoxx.TVoxxTopShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
