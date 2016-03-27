@@ -146,6 +146,7 @@
 		B98FF7721BFFDAC70095FFBC /* TVoxxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVoxxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98FF7761BFFDAC70095FFBC /* TVoxxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVoxxUITests.swift; sourceTree = "<group>"; };
 		B98FF7781BFFDAC70095FFBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B991D30B1CA89ED300AA352E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9A6A1491CA036A000FE00DF /* TVoxx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TVoxx.entitlements; sourceTree = "<group>"; };
 		B9A6A14A1CA036B000FE00DF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B9AEA20F1C94C8D0005BC13B /* SpeakerDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetail.swift; sourceTree = "<group>"; };
@@ -834,6 +835,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B9452FB41CA6A93800ABC6E8 /* fr */,
+				B991D30B1CA89ED300AA352E /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
