@@ -88,7 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: searchContainerViewController)
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.Search, tag: 0)
         if var viewControllers = tabBarController.viewControllers {
+            let aboutViewController = viewControllers.removeLast()
             viewControllers.append(navigationController)
+            viewControllers.append(aboutViewController)
             tabBarController.viewControllers = viewControllers
             self.window?.rootViewController = tabBarController
             self.window?.makeKeyAndVisible()

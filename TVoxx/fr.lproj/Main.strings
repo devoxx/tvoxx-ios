@@ -16,6 +16,9 @@
 /* Class = "UILabel"; text = "No result found."; ObjectID = "8Ab-a9-Xki"; */
 "8Ab-a9-Xki.text" = "Aucun résultat.";
 
+/* Class = "UITabBarItem"; title = "About"; ObjectID = "8qb-Bo-AJn"; */
+"8qb-Bo-AJn.title" = "A propos";
+
 /* Class = "UILabel"; text = "Loading..."; ObjectID = "Ct0-Vt-oqp"; */
 "Ct0-Vt-oqp.text" = "Chargement...";
 
@@ -82,6 +85,9 @@
 /* Class = "UILabel"; text = "Name"; ObjectID = "lXZ-eU-Cd3"; */
 "lXZ-eU-Cd3.text" = "Nom";
 
+/* Class = "UILabel"; text = "About TVoxx"; ObjectID = "mTq-Gv-33j"; */
+"mTq-Gv-33j.text" = "A propos de TVoxx";
+
 /* Class = "UILabel"; text = "Company"; ObjectID = "myx-ME-fmg"; */
 "myx-ME-fmg.text" = "Société";
 
@@ -120,6 +126,9 @@
 
 /* Class = "UILabel"; text = "Format"; ObjectID = "xuh-kc-lR7"; */
 "xuh-kc-lR7.text" = "Format";
+
+/* Class = "UILabel"; text = "TVoxx was originally developed by Sebastien Arbogast from Epseelon. You can contact him on  sebastien.arbogast@epseelon.com  The code for TVoxx is open source and published under a GNU GPL license on  http://www.github.com/epseelon/tvoxx-ios  All contributions are welcome in the form of pull requests and issues."; ObjectID = "z3F-Jw-VPb"; */
+"z3F-Jw-VPb.text" = "La première version de TVoxx a été développée par Sébastien Arbogast de la société Epseelon. Vous pouvez le contacter à l'adresse sebastien.arbogast@epseelon.com  Le code de TVoxx est open source et publié sous licence GNU GPL sur http://www.github.com/epseelon/tvoxx-ios  Toutes les contributions sont bienvenues, sous formes de pull requests ou de tickets.";
 
 /* Class = "UILabel"; text = "Loading..."; ObjectID = "zb6-Mq-vsz"; */
 "zb6-Mq-vsz.text" = "Chargement...";
