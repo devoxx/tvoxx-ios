@@ -64,6 +64,9 @@
 /* Class = "UILabel"; text = "speaker bio"; ObjectID = "ZbD-l9-oKc"; */
 "ZbD-l9-oKc.text" = "biographie de l'orateur";
 
+/* Class = "UILabel"; text = "Version 1.0 (12)"; ObjectID = "Zsi-bA-j8s"; */
+"Zsi-bA-j8s.text" = "Version 1.0 (12)";
+
 /* Class = "UITabBarItem"; title = "Talks"; ObjectID = "acW-dT-cKf"; */
 "acW-dT-cKf.title" = "Présentations";
 

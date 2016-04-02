@@ -95,6 +95,8 @@ extension SearchResultsViewController: UICollectionViewDataSource {
         cell.talk = self.searchResults![indexPath.row]
         return cell
     }
+
+
 }
 
 extension SearchResultsViewController: UICollectionViewDelegate {

@@ -69,5 +69,8 @@ ma liste";
 "Unknown error. Please try again later." = "Erreur inconnue. Merci de réessayer plus tard.";
 
 /* No comment provided by engineer. */
+"Version %@ (%@)" = "Version %@ (%@)";
+
+/* No comment provided by engineer. */
 "You need to sign in to your iCloud account in order to use the watchlist feature. On the Home screen, launch Settings, tap Accounts, then tap iCloud, and enter your Apple ID. Turn iCloud Drive on. If you don't have an iCloud account, tap Create a new Apple ID." = "Vous devez vous connecter à votre compte iCloud pour utiliser la fonctionnalité \"Ma liste\". Sur l'écran d'accueil, lancez \"Réglages\", cliquez sur Comptes, puis iCloud, et saisissez vos identifiants Apple. Activez iCloud Drive. Si vous n'avez pas de compte iCloud, cliquez sur Créer un nouvel identifiant Apple ID.";
 

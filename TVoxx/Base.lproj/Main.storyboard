@@ -426,7 +426,7 @@
         <!--About-->
         <scene sceneID="Me2-71-wzc">
             <objects>
-                <viewController id="MvV-k5-l2x" sceneMemberID="viewController">
+                <viewController id="MvV-k5-l2x" customClass="AboutViewController" customModule="TVoxx" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3G-bE-kVa"/>
                         <viewControllerLayoutGuide type="bottom" id="9QQ-6X-Gbg"/>
@@ -446,7 +446,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="XOS-sh-D7p">
-                                <rect key="frame" x="341" y="270" width="1238" height="541"/>
+                                <rect key="frame" x="341" y="240" width="1238" height="600"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SebastienArbogast" translatesAutoresizingMaskIntoConstraints="NO" id="3pL-4M-cgE">
                                         <rect key="frame" x="494" y="0.0" width="250" height="250"/>
@@ -455,10 +455,16 @@
                                             <constraint firstAttribute="width" constant="250" id="zXj-5c-ard"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3F-Jw-VPb">
-                                        <rect key="frame" x="0.0" y="290" width="1238" height="251"/>
-                                        <mutableString key="text">TVoxx was originally developed by Sebastien Arbogast from Epseelon. You can contact him on  sebastien.arbogast@epseelon.com  The code for TVoxx is open source and published under a GNU GPL license on  http://www.github.com/epseelon/tvoxx-ios  All contributions are welcome in the form of pull requests and issues.</mutableString>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3F-Jw-VPb">
+                                        <rect key="frame" x="0.0" y="290" width="1238" height="242"/>
+                                        <string key="text">TVoxx was originally developed by Sebastien Arbogast from Epseelon. You can contact him on  sebastien.arbogast@epseelon.com  The code for TVoxx is open source and published under a GNU GPL license on  http://www.github.com/epseelon/tvoxx-ios  All contributions are welcome in the form of pull requests and issues.</string>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0 (12)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zsi-bA-j8s">
+                                        <rect key="frame" x="540" y="572" width="159" height="28"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -479,6 +485,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="About" id="8qb-Bo-AJn"/>
+                    <connections>
+                        <outlet property="versionLabel" destination="Zsi-bA-j8s" id="RTg-Jl-Bic"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rU-pj-SMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="hxq-01-uuH">
@@ -771,7 +780,6 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstItem="2zj-Yk-gs9" firstAttribute="centerX" secondItem="VYG-lO-Nqo" secondAttribute="centerX" id="aYo-Cf-MFP"/>
-                                                            <constraint firstAttribute="width" constant="120" id="bUA-I7-Cy5"/>
                                                             <constraint firstItem="2zj-Yk-gs9" firstAttribute="centerY" secondItem="VYG-lO-Nqo" secondAttribute="centerY" constant="-25" id="sBs-ho-vbm"/>
                                                         </constraints>
                                                     </view>

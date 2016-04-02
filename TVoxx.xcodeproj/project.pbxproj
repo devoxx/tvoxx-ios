@@ -52,6 +52,7 @@
 		B9DCB72E1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCB72D1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift */; };
 		B9DCB7301C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCB72F1C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift */; };
 		B9E216F61C8F2B0F001C4627 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E216F51C8F2B0F001C4627 /* Utils.swift */; };
+		B9EE19961CAFE6330019F778 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EE19951CAFE6330019F778 /* AboutViewController.swift */; };
 		B9F41D501C974DA000780B4A /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9F41D4F1C974DA000780B4A /* TVServices.framework */; };
 		B9F41D531C974DA000780B4A /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F41D521C974DA000780B4A /* ServiceProvider.swift */; };
 		B9F41D571C974DA000780B4A /* TVoxxTopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B9F41D4E1C974DA000780B4A /* TVoxxTopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -158,6 +159,7 @@
 		B9DCB72D1C8CAF20001B2585 /* SpeakerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerCollectionViewCell.swift; sourceTree = "<group>"; };
 		B9DCB72F1C8CB1F7001B2585 /* SpeakersCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersCollectionReusableView.swift; sourceTree = "<group>"; };
 		B9E216F51C8F2B0F001C4627 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		B9EE19951CAFE6330019F778 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		B9F41D4E1C974DA000780B4A /* TVoxxTopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TVoxxTopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9F41D4F1C974DA000780B4A /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
 		B9F41D521C974DA000780B4A /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				B928CC311C9C84990026E007 /* SearchResultsViewController.swift */,
 				B948270A1CA585DA00012B13 /* WatchlistViewController.swift */,
 				B948270C1CA58D3E00012B13 /* UIViewController+WatchListErrors.swift */,
+				B9EE19951CAFE6330019F778 /* AboutViewController.swift */,
 			);
 			path = TVoxx;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				B948270D1CA58D3F00012B13 /* UIViewController+WatchListErrors.swift in Sources */,
 				B9AEA2101C94C8D0005BC13B /* SpeakerDetail.swift in Sources */,
 				B9F8114C1C94DBBE0099031F /* TalksCollectionReusableView.swift in Sources */,
+				B9EE19961CAFE6330019F778 /* AboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
