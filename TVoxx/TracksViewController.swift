@@ -102,6 +102,7 @@ extension TracksViewController : UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TrackCell", forIndexPath: indexPath) as! TrackCollectionViewCell
         cell.track = self.tracks[indexPath.section]
+        cell.setNeedsLayout()
         return cell
     }
     
