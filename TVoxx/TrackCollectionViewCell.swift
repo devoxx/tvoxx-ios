@@ -18,17 +18,17 @@ class TrackCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    override func canBecomeFocused() -> Bool {
+    override var canBecomeFocused : Bool {
         return false
     }
 }
 
 extension TrackCollectionViewCell: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1;
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let talks = self.track?.talks {
             return talks.count
         } else {
@@ -36,16 +36,16 @@ extension TrackCollectionViewCell: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TalkCell", forIndexPath: indexPath) as! TalkCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TalkCell", for: indexPath) as! TalkCollectionViewCell
         cell.talk = self.track?.talks[indexPath.row]
         return cell
     }
 }
 
 extension TrackCollectionViewCell: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let talk = self.track?.talks[indexPath.row]
-        NSNotificationCenter.defaultCenter().postNotificationName("talkSelected", object: self, userInfo: ["selectedTalk":talk!])
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "talkSelected"), object: self, userInfo: ["selectedTalk":talk!])
     }
 }

@@ -28,19 +28,19 @@ class TalkDetail: NSObject {
     var record:CKRecord {
         let recordId = CKRecordID(recordName: self.talkId)
         let talkRecord = CKRecord(recordType: "Talk", recordID: recordId)
-        talkRecord["talkId"] = self.talkId
-        talkRecord["title"] = self.title
-        talkRecord["thumbnailUrl"] = self.thumbnailUrl
-        talkRecord["talkType"] = self.talkType
-        talkRecord["summary"] = self.summary
-        talkRecord["summaryAsHtml"] = self.summaryAsHtml
-        talkRecord["trackTitle"] = self.trackTitle
-        talkRecord["lang"] = self.lang
-        talkRecord["averageRating"] = self.averageRating
-        talkRecord["numberOfRatings"] = self.numberOfRatings
-        talkRecord["youtubeVideoId"] = self.youtubeVideoId
-        talkRecord["conferenceLabel"] = self.conferenceLabel
-        talkRecord["durationInSeconds"] = self.durationInSeconds
+        talkRecord["talkId"] = self.talkId as CKRecordValue?
+        talkRecord["title"] = self.title as CKRecordValue?
+        talkRecord["thumbnailUrl"] = self.thumbnailUrl as CKRecordValue?
+        talkRecord["talkType"] = self.talkType as CKRecordValue?
+        talkRecord["summary"] = self.summary as CKRecordValue?
+        talkRecord["summaryAsHtml"] = self.summaryAsHtml as CKRecordValue?
+        talkRecord["trackTitle"] = self.trackTitle as CKRecordValue?
+        talkRecord["lang"] = self.lang as CKRecordValue?
+        talkRecord["averageRating"] = self.averageRating as CKRecordValue?
+        talkRecord["numberOfRatings"] = self.numberOfRatings as CKRecordValue?
+        talkRecord["youtubeVideoId"] = self.youtubeVideoId as CKRecordValue?
+        talkRecord["conferenceLabel"] = self.conferenceLabel as CKRecordValue?
+        talkRecord["durationInSeconds"] = self.durationInSeconds as CKRecordValue?
         return talkRecord
     }
     

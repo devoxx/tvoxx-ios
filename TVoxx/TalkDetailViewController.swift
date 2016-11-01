@@ -40,9 +40,9 @@ class TalkDetailViewController: UIViewController {
     @IBOutlet weak var watchListLabel:UILabel!
     @IBOutlet weak var watchListLoadingView:UIView!
     
-    private var topFocusGuide = UIFocusGuide()
-    private var tapGestureRecognizer: UITapGestureRecognizer?
-    private var selectedSpeaker:SpeakerListItem?
+    fileprivate var topFocusGuide = UIFocusGuide()
+    fileprivate var tapGestureRecognizer: UITapGestureRecognizer?
+    fileprivate var selectedSpeaker:SpeakerListItem?
     
     var talk: TalkListItem? {
         didSet {
@@ -59,28 +59,28 @@ class TalkDetailViewController: UIViewController {
             if let talkDetail = self.talkDetail {
                 self.titleLabel.text = talkDetail.title
                 self.formatLabel.text = talkDetail.talkType
-                self.conferenceLabel.text = talkDetail.conferenceLabel.stringByReplacingOccurrencesOfString(", ", withString: ",\n")
+                self.conferenceLabel.text = talkDetail.conferenceLabel.replacingOccurrences(of: ", ", with: ",\n")
                 self.trackLabel.text = talkDetail.trackTitle
                 if let rating = talkDetail.averageRating {
                     self.ratingView.rating = rating
                     self.ratingLabel.text = String.localizedStringWithFormat(NSLocalizedString("Out of %d votes", comment:""), talkDetail.numberOfRatings!)
-                    self.ratingGroup.hidden = false
+                    self.ratingGroup.isHidden = false
                 } else {
-                    self.ratingGroup.hidden = true
+                    self.ratingGroup.isHidden = true
                 }
                 self.abstractLabel.text = talkDetail.summary
-                self.languageLabel.text = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: talkDetail.lang)
-                self.thumbnailView.af_setImageWithURL(NSURL(string: talkDetail.thumbnailUrl)!, placeholderImage: UIImage(named: "talk"))
+                self.languageLabel.text = (Locale.current as NSLocale).displayName(forKey: NSLocale.Key.identifier, value: talkDetail.lang)
+                self.thumbnailView.af_setImage(withURL:URL(string: talkDetail.thumbnailUrl)!, placeholderImage: UIImage(named: "talk"))
                 
                 self.durationLabel.text = Utils.formatDuration(talkDetail.durationInSeconds)
                 
                 self.speakersCollectionView.reloadData()
                 
-                self.loadingView.hidden = true
-                self.loadingLabel.hidden = true
-                self.titleLabel.hidden = false
-                self.detailView.hidden = false
-                self.speakersCollectionView.hidden = false
+                self.loadingView.isHidden = true
+                self.loadingLabel.isHidden = true
+                self.titleLabel.isHidden = false
+                self.detailView.isHidden = false
+                self.speakersCollectionView.isHidden = false
                 
                 self.updateWatchListButton()
             }
@@ -90,49 +90,49 @@ class TalkDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addToWatchlistButton.titleLabel?.font = UIFont.fontAwesomeOfSize(40)
-        self.playButton.titleLabel?.font = UIFont.fontAwesomeOfSize(40)
-        self.playButton.setTitle(String.fontAwesomeIconWithName(.Play), forState: .Normal)
+        self.addToWatchlistButton.titleLabel?.font = UIFont.fontAwesome(ofSize:40)
+        self.playButton.titleLabel?.font = UIFont.fontAwesome(ofSize:40)
+        self.playButton.setTitle(String.fontAwesomeIcon(name: .play), for: .normal)
         self.playLabel.text = NSLocalizedString("Play", comment: "") + "\n "
         
-        self.ratingView.settings.fillMode = .Precise
+        self.ratingView.settings.fillMode = .precise
         self.setupFocus()
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TalkDetailViewController.tapped(_:)))
-        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
+        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(value: UIPressType.playPause.rawValue as Int)]
         self.view.addGestureRecognizer(self.tapGestureRecognizer!)
     }
     
-    func tapped(sender:UITapGestureRecognizer) {
-        if sender.state == .Ended {
+    func tapped(_ sender:UITapGestureRecognizer) {
+        if sender.state == .ended {
             self.play()
         }
     }
     
-    private func setupFocus() {
+    fileprivate func setupFocus() {
         view.addLayoutGuide(self.topFocusGuide)
-        topFocusGuide.bottomAnchor.constraintEqualToAnchor(speakersCollectionView.topAnchor).active = true
-        topFocusGuide.leftAnchor.constraintEqualToAnchor(self.view.leftAnchor).active = true
-        topFocusGuide.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
-        topFocusGuide.topAnchor.constraintEqualToAnchor(self.playButton.bottomAnchor).active = true
+        topFocusGuide.bottomAnchor.constraint(equalTo: speakersCollectionView.topAnchor).isActive = true
+        topFocusGuide.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        topFocusGuide.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        topFocusGuide.topAnchor.constraint(equalTo: self.playButton.bottomAnchor).isActive = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.titleLabel.hidden = true
-        self.detailView.hidden = true
-        self.speakersCollectionView.hidden = true
+        self.titleLabel.isHidden = true
+        self.detailView.isHidden = true
+        self.speakersCollectionView.isHidden = true
         
         if let talk = self.talk {
-            self.loadingView.hidden = false
+            self.loadingView.isHidden = false
             self.loadingLabel.text = talk.title + "..."
             self.loadingIndicator.startAnimating()
             TVoxxServer.sharedServer.getTalkWithTalkId(talk.talkId) { (talkDetail: TalkDetail) in
                 self.talkDetail = talkDetail
             }
         } else {
-            self.loadingView.hidden = true
+            self.loadingView.isHidden = true
             self.loadingLabel.text = NSLocalizedString("No talk to load", comment: "")
         }
         
@@ -144,10 +144,10 @@ class TalkDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         guard let nextFocusedView = context.nextFocusedView else { return }
         
-        if nextFocusedView.isKindOfClass(SpeakerCollectionViewCell) {
+        if nextFocusedView.isKind(of: SpeakerCollectionViewCell.self) {
             self.topFocusGuide.preferredFocusedView = self.playButton
         } else {
             self.topFocusGuide.preferredFocusedView = self.speakersCollectionView
@@ -169,18 +169,18 @@ class TalkDetailViewController: UIViewController {
         return self.playButton
     }
     
-    @IBAction func playButtonTyped(sender: AnyObject) {
+    @IBAction func playButtonTyped(_ sender: AnyObject) {
         self.play()
     }
     
-    @IBAction func watchlistButtonTyped(sender: AnyObject) {
+    @IBAction func watchlistButtonTyped(_ sender: AnyObject) {
         if let talkDetail = self.talkDetail {
             WatchList.sharedWatchList.isTalkAlreadyInWatchList(talkDetail){ (result:Bool?, error:WatchListError?) in
                 if let error = error {
                     switch error {
-                    case .NotAuthenticated:
+                    case .notAuthenticated:
                         self.showAuthenticationError(NSLocalizedString("Impossible to access your watchlist", comment: ""))
-                    case .BackendError(let rootCause):
+                    case .backendError(let rootCause):
                         self.showBackendError(rootCause, title: NSLocalizedString("Impossible to access your watchlist", comment: ""))
                     }
                 } else {
@@ -188,27 +188,27 @@ class TalkDetailViewController: UIViewController {
                         WatchList.sharedWatchList.removeTalkFromWatchList(talkDetail) { (error:WatchListError?) in
                             if let error = error {
                                 switch error {
-                                case .NotAuthenticated:
+                                case .notAuthenticated:
                                     self.showAuthenticationError(NSLocalizedString("Error while removing this talk from your watchlist", comment: ""))
-                                case .BackendError(let rootCause):
+                                case .backendError(let rootCause):
                                     self.showBackendError(rootCause, title: NSLocalizedString("Error while removing this talk from your watchlist", comment: ""))
                                 }
                             }
                             self.updateWatchListButton()
-                            NSNotificationCenter.defaultCenter().postNotificationName(TVTopShelfItemsDidChangeNotification, object: nil)
+                            NotificationCenter.default.post(name: NSNotification.Name.TVTopShelfItemsDidChange, object: nil)
                         }
                     } else {
                         WatchList.sharedWatchList.addTalkToWatchList(talkDetail) { (error:WatchListError?) in
                             if let error = error {
                                 switch error {
-                                case .NotAuthenticated:
+                                case .notAuthenticated:
                                     self.showAuthenticationError(NSLocalizedString("Error while adding this talk to your watchlist", comment: ""))
-                                case .BackendError(let rootCause):
+                                case .backendError(let rootCause):
                                     self.showBackendError(rootCause, title: NSLocalizedString("Error while adding this talk to your watchlist", comment: ""))
                                 }
                             }
                             self.updateWatchListButton()
-                            NSNotificationCenter.defaultCenter().postNotificationName(TVTopShelfItemsDidChangeNotification, object: nil)
+                            NotificationCenter.default.post(name: NSNotification.Name.TVTopShelfItemsDidChange, object: nil)
                         }
                     }
                 }
@@ -218,37 +218,37 @@ class TalkDetailViewController: UIViewController {
     
     func updateWatchListButton() {
         if let talkDetail = self.talkDetail {
-            self.watchListView.hidden = true
-            self.watchListLoadingView.hidden = false
+            self.watchListView.isHidden = true
+            self.watchListLoadingView.isHidden = false
             WatchList.sharedWatchList.isTalkAlreadyInWatchList(talkDetail){ (result:Bool?, error:WatchListError?) in
-                self.watchListLoadingView.hidden = true
+                self.watchListLoadingView.isHidden = true
                 if let error = error {
-                    self.watchListView.hidden = true
+                    self.watchListView.isHidden = true
                     switch error {
-                    case .NotAuthenticated:
+                    case .notAuthenticated:
                         NSLog("User is not authenticated")
-                    case .BackendError(let rootCause):
-                        NSLog("CloudKit error: " + rootCause.debugDescription)
+                    case .backendError(let rootCause):
+                        NSLog("CloudKit error: " + rootCause.localizedDescription)
                     }
                 } else {
                     if result! {
-                        self.addToWatchlistButton.setTitle(String.fontAwesomeIconWithName(.MinusCircle), forState: .Normal)
+                        self.addToWatchlistButton.setTitle(String.fontAwesomeIcon(name: .minusCircle), for: .normal)
                         self.watchListLabel.text = NSLocalizedString("Remove from\nwatchlist", comment: "")
                     } else {
-                        self.addToWatchlistButton.setTitle(String.fontAwesomeIconWithName(.PlusCircle), forState: .Normal)
+                        self.addToWatchlistButton.setTitle(String.fontAwesomeIcon(name:.plusCircle), for: .normal)
                         self.watchListLabel.text = NSLocalizedString("Add to\nwatchlist", comment: "")
                     }
-                    self.watchListView.hidden = false
+                    self.watchListView.isHidden = false
                 }
             }
         } else {
-            self.watchListView.hidden = true
+            self.watchListView.isHidden = true
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSpeakerDetail" {
-            if let speakerDetailViewController = segue.destinationViewController as? SpeakerDetailViewController, selectedSpeaker = self.selectedSpeaker {
+            if let speakerDetailViewController = segue.destination as? SpeakerDetailViewController, let selectedSpeaker = self.selectedSpeaker {
                 speakerDetailViewController.speaker = selectedSpeaker
             }
         }
@@ -258,44 +258,44 @@ class TalkDetailViewController: UIViewController {
         if let youtubeID = self.talkDetail?.youtubeVideoId {
             var videoInfo = Youtube.h264videosWithYoutubeID(youtubeID)
             if let videoURLString = videoInfo?["url"] as? String {
-                let asset = AVAsset(URL: NSURL(string: videoURLString)!)
+                let asset = AVAsset(url: URL(string: videoURLString)!)
                 let playerItem = AVPlayerItem(asset: asset)
                 
                 let titleMetadata = AVMutableMetadataItem()
-                titleMetadata.key = AVMetadataCommonKeyTitle
+                titleMetadata.key = AVMetadataCommonKeyTitle as (NSCopying & NSObjectProtocol)?
                 titleMetadata.keySpace = AVMetadataKeySpaceCommon
-                titleMetadata.locale = NSLocale.currentLocale()
-                titleMetadata.value = self.talkDetail!.title
+                titleMetadata.locale = Locale.current
+                titleMetadata.value = self.talkDetail!.title as (NSCopying & NSObjectProtocol)?
                 
                 let descriptionMetadata = AVMutableMetadataItem()
-                descriptionMetadata.key = AVMetadataCommonKeyDescription
+                descriptionMetadata.key = AVMetadataCommonKeyDescription as (NSCopying & NSObjectProtocol)?
                 descriptionMetadata.keySpace = AVMetadataKeySpaceCommon
-                descriptionMetadata.locale = NSLocale.currentLocale()
-                descriptionMetadata.value = self.talkDetail!.summary
+                descriptionMetadata.locale = Locale.current
+                descriptionMetadata.value = self.talkDetail!.summary as (NSCopying & NSObjectProtocol)?
                 
                 playerItem.externalMetadata = [titleMetadata, descriptionMetadata]
                 
                 if let track = self.talkDetail?.trackTitle {
                     let genreMetadata = AVMutableMetadataItem()
-                    genreMetadata.locale = NSLocale.currentLocale()
+                    genreMetadata.locale = Locale.current
                     genreMetadata.identifier = AVMetadataIdentifierQuickTimeMetadataGenre
-                    genreMetadata.value = track
+                    genreMetadata.value = track as (NSCopying & NSObjectProtocol)?
                     playerItem.externalMetadata.append(genreMetadata)
                 }
                 
                 if let image = self.thumbnailView.image {
                     let artworkMetadata = AVMutableMetadataItem()
-                    artworkMetadata.locale = NSLocale.currentLocale()
-                    artworkMetadata.key = AVMetadataCommonKeyArtwork
+                    artworkMetadata.locale = Locale.current
+                    artworkMetadata.key = AVMetadataCommonKeyArtwork as (NSCopying & NSObjectProtocol)?
                     artworkMetadata.keySpace = AVMetadataKeySpaceCommon
-                    artworkMetadata.value = UIImageJPEGRepresentation(image, 1.0)
+                    artworkMetadata.value = UIImageJPEGRepresentation(image, 1.0) as (NSCopying & NSObjectProtocol)?
                     playerItem.externalMetadata.append(artworkMetadata)
                 }
                 
                 let player = AVPlayer(playerItem: playerItem)
                 let playerController = AVPlayerViewController()
                 playerController.player = player
-                self.presentViewController(playerController, animated: true, completion: { () -> Void in
+                self.present(playerController, animated: true, completion: { () -> Void in
                     player.play()
                 })
             }
@@ -304,7 +304,7 @@ class TalkDetailViewController: UIViewController {
 }
 
 extension TalkDetailViewController: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         if let talk = self.talkDetail {
             if talk.speakers.count > 0 {
                 return 1
@@ -316,7 +316,7 @@ extension TalkDetailViewController: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let talk = self.talkDetail {
             if talk.speakers.count > 0 {
                 return talk.speakers.count
@@ -328,16 +328,16 @@ extension TalkDetailViewController: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SpeakerCell", forIndexPath: indexPath) as! SpeakerCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SpeakerCell", for: indexPath) as! SpeakerCollectionViewCell
         cell.speaker = self.talkDetail!.speakers[indexPath.row]
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "SpeakersHeader", forIndexPath: indexPath) as! SpeakersCollectionReusableView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SpeakersHeader", for: indexPath) as! SpeakersCollectionReusableView
             headerView.titleLabel.text = NSLocalizedString("Speakers", comment:"")
             return headerView
         default:
@@ -348,8 +348,8 @@ extension TalkDetailViewController: UICollectionViewDataSource {
 }
 
 extension TalkDetailViewController: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedSpeaker = self.talkDetail?.speakers[indexPath.row]
-        self.performSegueWithIdentifier("showSpeakerDetail", sender: self)
+        self.performSegue(withIdentifier: "showSpeakerDetail", sender: self)
     }
 }

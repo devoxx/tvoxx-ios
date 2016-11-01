@@ -16,29 +16,29 @@ class WatchlistViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var emptyLabel:UILabel!
-    private var talks = [TalkListItem]()
-    private var selectedTalk:TalkListItem?
-    private var tapGestureRecognizer:UITapGestureRecognizer?
+    fileprivate var talks = [TalkListItem]()
+    fileprivate var selectedTalk:TalkListItem?
+    fileprivate var tapGestureRecognizer:UITapGestureRecognizer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.emptyLabel.text = NSLocalizedString("No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\".", comment: "")
-        self.emptyLabel.hidden = false
-        self.loadingView.hidden = true
+        self.emptyLabel.isHidden = false
+        self.loadingView.isHidden = true
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WatchlistViewController.tapped(_:)))
-        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
+        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(value: UIPressType.playPause.rawValue as Int)]
         self.view.addGestureRecognizer(self.tapGestureRecognizer!)
     }
     
-    func tapped(sender:UITapGestureRecognizer) {
-        if sender.state == .Ended {
-            if let focusedCell = UIScreen.mainScreen().focusedView as? TalkCollectionViewCell {
+    func tapped(_ sender:UITapGestureRecognizer) {
+        if sender.state == .ended {
+            if let focusedCell = UIScreen.main.focusedView as? TalkCollectionViewCell {
                 if let player = focusedCell.play() {
                     let playerController = AVPlayerViewController()
                     playerController.player = player
-                    self.presentViewController(playerController, animated: true, completion: { () -> Void in
+                    self.present(playerController, animated: true, completion: { () -> Void in
                         player.play()
                     })
                 }
@@ -46,29 +46,29 @@ class WatchlistViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.emptyLabel.hidden = true
-        self.loadingView.hidden = false
+        self.emptyLabel.isHidden = true
+        self.loadingView.isHidden = false
         WatchList.sharedWatchList.moviesInWatchList { (talks:[TalkListItem]?, error:WatchListError?) in
-            self.loadingView.hidden = true
+            self.loadingView.isHidden = true
             if let error = error {
-                self.emptyLabel.hidden = false
+                self.emptyLabel.isHidden = false
                 switch error {
-                case .NotAuthenticated:
+                case .notAuthenticated:
                     self.emptyLabel.text = NSLocalizedString("You need to sign in to your iCloud account in order to use the watchlist feature. On the Home screen, launch Settings, tap Accounts, then tap iCloud, and enter your Apple ID. Turn iCloud Drive on. If you don't have an iCloud account, tap Create a new Apple ID.", comment: "")
-                case .BackendError(let rootCause):
+                case .backendError(let rootCause):
                     self.emptyLabel.text = NSLocalizedString("Impossible to load your watchlist", comment: "")
-                    NSLog("CloudKit error: " + rootCause.debugDescription)
+                    NSLog("CloudKit error: " + rootCause.localizedDescription)
                 }
             } else {
-                if let talks = talks where talks.count > 0 {
+                if let talks = talks, talks.count > 0 {
                     self.talks = talks
                 } else {
                     self.talks = [TalkListItem]()
                     self.emptyLabel.text = NSLocalizedString("No talk in watchlist. To add some, go to individual talks and tap \"Add to watchlist\"", comment:"")
-                    self.emptyLabel.hidden = false
+                    self.emptyLabel.isHidden = false
                 }
                 self.collectionView.reloadData()
             }
@@ -85,9 +85,9 @@ class WatchlistViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTalkDetail" {
-            if let selectedTalk = self.selectedTalk, talkDetailViewController = segue.destinationViewController as? TalkDetailViewController {
+            if let selectedTalk = self.selectedTalk, let talkDetailViewController = segue.destination as? TalkDetailViewController {
                 talkDetailViewController.talk = selectedTalk
             }
         }
@@ -97,24 +97,24 @@ class WatchlistViewController: UIViewController {
 }
 
 extension WatchlistViewController: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.talks.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let talkCell = collectionView.dequeueReusableCellWithReuseIdentifier("TalkCell", forIndexPath: indexPath) as! TalkCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let talkCell = collectionView.dequeueReusableCell(withReuseIdentifier: "TalkCell", for: indexPath) as! TalkCollectionViewCell
         talkCell.talk = self.talks[indexPath.row]
         return talkCell
     }
 }
 
 extension WatchlistViewController: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedTalk = self.talks[indexPath.row]
-        self.performSegueWithIdentifier("showTalkDetail", sender: self)
+        self.performSegue(withIdentifier: "showTalkDetail", sender: self)
     }
 }

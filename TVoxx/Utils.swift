@@ -9,7 +9,7 @@
 import UIKit
 
 class Utils: NSObject {
-    static func formatDuration(seconds:Int) -> String {
+    static func formatDuration(_ seconds:Int) -> String {
         let (h,m,s) = secondsToHoursMinutesSeconds(seconds)
         var durationString = ""
         if h>0 {
@@ -23,7 +23,7 @@ class Utils: NSObject {
         return durationString
     }
     
-    private static func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+    fileprivate static func secondsToHoursMinutesSeconds (_ seconds : Int) -> (Int, Int, Int) {
         return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 }

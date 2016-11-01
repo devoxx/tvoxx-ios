@@ -15,8 +15,8 @@ class SpeakersViewController: UIViewController {
     @IBOutlet weak var headerLabel:UILabel!
     @IBOutlet weak var loadingLabel:UILabel!
     
-    private var speakers:[SpeakerListItem]?
-    private var selectedSpeaker:SpeakerListItem?
+    fileprivate var speakers:[SpeakerListItem]?
+    fileprivate var selectedSpeaker:SpeakerListItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,24 +24,24 @@ class SpeakersViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.loadingIndicator.startAnimating()
-        self.loadingView.hidden = false
-        self.loadingIndicator.hidden = false
-        self.collectionView.hidden = true
+        self.loadingView.isHidden = false
+        self.loadingIndicator.isHidden = false
+        self.collectionView.isHidden = true
         
         TVoxxServer.sharedServer.getSpeakers { (speakers:[SpeakerListItem]) in
             if speakers.count == 0 {
                 self.loadingLabel.text = NSLocalizedString("Could not find any speaker", comment:"")
-                self.loadingIndicator.hidden = true
-                self.loadingView.hidden = false
+                self.loadingIndicator.isHidden = true
+                self.loadingView.isHidden = false
             } else {
                 self.speakers = speakers
                 self.collectionView.reloadData()
-                self.loadingView.hidden = true
-                self.collectionView.hidden = false
+                self.loadingView.isHidden = true
+                self.collectionView.isHidden = false
             }
         }
     }
@@ -52,9 +52,9 @@ class SpeakersViewController: UIViewController {
     }
     
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSpeakerDetail" {
-            if let speakerDetailViewController = segue.destinationViewController as? SpeakerDetailViewController, selectedSpeaker = self.selectedSpeaker {
+            if let speakerDetailViewController = segue.destination as? SpeakerDetailViewController, let selectedSpeaker = self.selectedSpeaker {
                 speakerDetailViewController.speaker = selectedSpeaker
             }
         }
@@ -62,11 +62,11 @@ class SpeakersViewController: UIViewController {
 }
 
 extension SpeakersViewController : UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let speakers = self.speakers {
             return speakers.count
         } else {
@@ -74,16 +74,16 @@ extension SpeakersViewController : UICollectionViewDataSource {
         }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SpeakerCell", forIndexPath: indexPath) as! SpeakerCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SpeakerCell", for: indexPath) as! SpeakerCollectionViewCell
         cell.speaker = self.speakers![indexPath.row]
         return cell
     }
 }
 
 extension SpeakersViewController : UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedSpeaker = self.speakers![indexPath.row]
-        self.performSegueWithIdentifier("showSpeakerDetail", sender: self)
+        self.performSegue(withIdentifier: "showSpeakerDetail", sender: self)
     }
 }

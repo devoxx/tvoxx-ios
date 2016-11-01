@@ -33,25 +33,25 @@ class SpeakerDetailViewController: UIViewController {
             }
         }
     }
-    private var speakerDetail:SpeakerDetail?
-    private var tapGestureRecognizer:UITapGestureRecognizer?
-    private var selectedTalk:TalkListItem?
+    fileprivate var speakerDetail:SpeakerDetail?
+    fileprivate var tapGestureRecognizer:UITapGestureRecognizer?
+    fileprivate var selectedTalk:TalkListItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SpeakerDetailViewController.tapped(_:)))
-        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
+        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(value: UIPressType.playPause.rawValue as Int)]
         self.view.addGestureRecognizer(self.tapGestureRecognizer!)
     }
     
-    func tapped(sender:UITapGestureRecognizer) {
-        if sender.state == .Ended {
-            if let focusedCell = UIScreen.mainScreen().focusedView as? TalkCollectionViewCell {
+    func tapped(_ sender:UITapGestureRecognizer) {
+        if sender.state == .ended {
+            if let focusedCell = UIScreen.main.focusedView as? TalkCollectionViewCell {
                 if let player = focusedCell.play() {
                     let playerController = AVPlayerViewController()
                     playerController.player = player
-                    self.presentViewController(playerController, animated: true, completion: { () -> Void in
+                    self.present(playerController, animated: true, completion: { () -> Void in
                         player.play()
                     })
                 }
@@ -59,15 +59,15 @@ class SpeakerDetailViewController: UIViewController {
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.nameLabel.hidden = true
-        self.detailView.hidden = true
-        self.talksCollectionView.hidden = true
+        self.nameLabel.isHidden = true
+        self.detailView.isHidden = true
+        self.talksCollectionView.isHidden = true
         
         if let speaker = self.speaker {
-            self.loadingView.hidden = false
+            self.loadingView.isHidden = false
             self.loadingLabel.text = speaker.firstName + " " + speaker.lastName + "..."
             self.loadingIndicator.startAnimating()
             TVoxxServer.sharedServer.getSpeakerWithUuid(speaker.uuid) { (speakerDetail: SpeakerDetail) in
@@ -79,23 +79,23 @@ class SpeakerDetailViewController: UIViewController {
                     self.companyLabel.text = ""
                 }
                 self.bioLabel.text = speakerDetail.bio
-                self.languageLabel.text = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: speakerDetail.lang)
+                self.languageLabel.text = (Locale.current as NSLocale).displayName(forKey: NSLocale.Key.identifier, value: speakerDetail.lang)
                 if let avatarUrl = speakerDetail.avatarUrl {
-                    self.avatarImageView.af_setImageWithURL(NSURL(string: avatarUrl)!, placeholderImage:UIImage(named: "talk"))
+                    self.avatarImageView.af_setImage(withURL:URL(string: avatarUrl)!, placeholderImage:UIImage(named: "talk"))
                 } else {
                     self.avatarImageView.image = UIImage(named: "talk")
                 }
                 
                 self.talksCollectionView.reloadData()
                 
-                self.loadingView.hidden = true
-                self.loadingLabel.hidden = true
-                self.nameLabel.hidden = false
-                self.detailView.hidden = false
-                self.talksCollectionView.hidden = false
+                self.loadingView.isHidden = true
+                self.loadingLabel.isHidden = true
+                self.nameLabel.isHidden = false
+                self.detailView.isHidden = false
+                self.talksCollectionView.isHidden = false
             }
         } else {
-            self.loadingView.hidden = true
+            self.loadingView.isHidden = true
             self.loadingLabel.text = NSLocalizedString("No speaker to load", comment: "")
         }
     }
@@ -106,9 +106,9 @@ class SpeakerDetailViewController: UIViewController {
     }    
 
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTalkDetail" {
-            if let talkDetailViewController = segue.destinationViewController as? TalkDetailViewController {
+            if let talkDetailViewController = segue.destination as? TalkDetailViewController {
                 talkDetailViewController.talk = self.selectedTalk
             }
         }
@@ -116,11 +116,11 @@ class SpeakerDetailViewController: UIViewController {
 }
 
 extension SpeakerDetailViewController: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let speaker = self.speakerDetail {
             return speaker.talks.count
         } else {
@@ -128,16 +128,16 @@ extension SpeakerDetailViewController: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TalkCell", forIndexPath: indexPath) as! TalkCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TalkCell", for: indexPath) as! TalkCollectionViewCell
         cell.talk = self.speakerDetail!.talks[indexPath.row]
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "TalksHeader", forIndexPath: indexPath) as! TalksCollectionReusableView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TalksHeader", for: indexPath) as! TalksCollectionReusableView
             headerView.titleLabel.text = NSLocalizedString("Talks", comment:"")
             return headerView
         default:
@@ -148,8 +148,8 @@ extension SpeakerDetailViewController: UICollectionViewDataSource {
 }
 
 extension SpeakerDetailViewController: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedTalk = self.speakerDetail?.talks[indexPath.row]
-        self.performSegueWithIdentifier("showTalkDetail", sender: self)
+        self.performSegue(withIdentifier: "showTalkDetail", sender: self)
     }
 }

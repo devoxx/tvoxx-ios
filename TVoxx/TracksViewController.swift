@@ -15,27 +15,27 @@ class TracksViewController: UIViewController {
     @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
-    private var tracks = [Track]()
-    private var selectedTalk: TalkListItem?
-    private var tapGestureRecognizer: UIGestureRecognizer?
+    fileprivate var tracks = [Track]()
+    fileprivate var selectedTalk: TalkListItem?
+    fileprivate var tapGestureRecognizer: UIGestureRecognizer?
     
-    private var selectionObserver:AnyObject?
+    fileprivate var selectionObserver:AnyObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TracksViewController.tapped(_:)))
-        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
+        self.tapGestureRecognizer?.allowedPressTypes = [NSNumber(value: UIPressType.playPause.rawValue as Int)]
         self.view.addGestureRecognizer(self.tapGestureRecognizer!)
     }
 
-    func tapped(sender:UITapGestureRecognizer) {
-        if sender.state == .Ended {
-            if let focusedCell = UIScreen.mainScreen().focusedView as? TalkCollectionViewCell {
+    func tapped(_ sender:UITapGestureRecognizer) {
+        if sender.state == .ended {
+            if let focusedCell = UIScreen.main.focusedView as? TalkCollectionViewCell {
                 if let player = focusedCell.play() {
                     let playerController = AVPlayerViewController()
                     playerController.player = player
-                    self.presentViewController(playerController, animated: true, completion: { () -> Void in
+                    self.present(playerController, animated: true, completion: { () -> Void in
                         player.play()
                     })
                 }
@@ -43,43 +43,43 @@ class TracksViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.collectionView.hidden = true
+        self.collectionView.isHidden = true
         self.loadingIndicator.startAnimating()
-        self.loadingView.hidden = false
+        self.loadingView.isHidden = false
         
         TVoxxServer.sharedServer.getTracks { (tracks:[Track]) -> Void in
             if tracks.count == 0 {
                 self.loadingLabel.text = NSLocalizedString("No talk to load", comment:"")
-                self.loadingIndicator.hidden = true
-                self.loadingView.hidden = false
+                self.loadingIndicator.isHidden = true
+                self.loadingView.isHidden = false
             } else {
-                self.loadingView.hidden = true
+                self.loadingView.isHidden = true
                 self.tracks = tracks
                 self.collectionView.reloadData()
-                self.collectionView.hidden = false
+                self.collectionView.isHidden = false
             }
         }
         
-        self.selectionObserver = NSNotificationCenter.defaultCenter().addObserverForName("talkSelected", object: nil, queue: NSOperationQueue.mainQueue()) { (notification:NSNotification) -> Void in
+        self.selectionObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "talkSelected"), object: nil, queue: OperationQueue.main) { (notification:Notification) -> Void in
             self.selectedTalk = notification.userInfo!["selectedTalk"] as? TalkListItem
-            self.performSegueWithIdentifier("showTalkDetail", sender: self)
+            self.performSegue(withIdentifier: "showTalkDetail", sender: self)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTalkDetail" {
-            if let talkDetailViewController = segue.destinationViewController as? TalkDetailViewController {
+            if let talkDetailViewController = segue.destination as? TalkDetailViewController {
                 talkDetailViewController.talk = self.selectedTalk
             }
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if let selectionObserver = self.selectionObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(selectionObserver)
+            NotificationCenter.default.removeObserver(selectionObserver)
         }
         super.viewWillAppear(animated)
     }
@@ -91,25 +91,25 @@ class TracksViewController: UIViewController {
 }
 
 extension TracksViewController : UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.tracks.count
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TrackCell", forIndexPath: indexPath) as! TrackCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCell", for: indexPath) as! TrackCollectionViewCell
         cell.track = self.tracks[indexPath.section]
         cell.setNeedsLayout()
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "TrackHeader", forIndexPath: indexPath) as! TrackCollectionReusableView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TrackHeader", for: indexPath) as! TrackCollectionReusableView
             headerView.titleLabel.text = self.tracks[indexPath.section].title
             return headerView
         default:
@@ -118,10 +118,10 @@ extension TracksViewController : UICollectionViewDataSource {
         }
     }
     
-    func openTalkWithTalkId(talkId:String, play:Bool) {
+    func openTalkWithTalkId(_ talkId:String, play:Bool) {
         TVoxxServer.sharedServer.getTalkWithTalkId(talkId, callback: { (talk:TalkDetail) -> Void in
             if self.presentedViewController != nil {
-                self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                self.dismiss(animated: false, completion: { () -> Void in
                     self.showTalkDetailForTalk(talk, play: play)
                 })
             } else {
@@ -130,9 +130,9 @@ extension TracksViewController : UICollectionViewDataSource {
         })
     }
     
-    private func showTalkDetailForTalk(talk:TalkDetail, play:Bool) {
-        if let talkDetailController = self.storyboard?.instantiateViewControllerWithIdentifier("TalkDetailViewController") as? TalkDetailViewController {
-            self.presentViewController(talkDetailController, animated: false, completion: { () -> Void in
+    fileprivate func showTalkDetailForTalk(_ talk:TalkDetail, play:Bool) {
+        if let talkDetailController = self.storyboard?.instantiateViewController(withIdentifier: "TalkDetailViewController") as? TalkDetailViewController {
+            self.present(talkDetailController, animated: false, completion: { () -> Void in
                 talkDetailController.talkDetail = talk
                 if play {
                     talkDetailController.play()

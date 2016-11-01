@@ -16,9 +16,9 @@ class SpeakerCollectionViewCell: UICollectionViewCell {
     var speaker:SpeakerListItem? {
         didSet {
             if let speaker = speaker {
-                nameLabel.text = "\(speaker.firstName.capitalizedString) \(speaker.lastName.capitalizedString)"
+                nameLabel.text = "\(speaker.firstName.capitalized) \(speaker.lastName.capitalized)"
                 if let avatarUrl = speaker.avatarUrl {
-                    avatarView.af_setImageWithURL(NSURL(string:avatarUrl)!, placeholderImage: UIImage(named: "speaker"))
+                    avatarView.af_setImage(withURL:URL(string:avatarUrl)!, placeholderImage: UIImage(named: "speaker"))
                 } else {
                     avatarView.image = UIImage(named: "speaker")
                 }
@@ -29,7 +29,7 @@ class SpeakerCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if context.nextFocusedView == self {
             coordinator.addCoordinatedAnimations({ () -> Void in
                 self.nameLabel.textColor = UIColor(red: 245/255.0, green: 175/255.0, blue: 51/255.0, alpha: 1.0)
@@ -37,7 +37,7 @@ class SpeakerCollectionViewCell: UICollectionViewCell {
                 }, completion: nil)
         } else {
             coordinator.addCoordinatedAnimations({ () -> Void in
-                self.nameLabel.textColor = UIColor.whiteColor()
+                self.nameLabel.textColor = UIColor.white
                 self.nameLabel.frame.origin.y -= 40
                 }, completion: nil)
         }

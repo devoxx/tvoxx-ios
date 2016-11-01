@@ -10,35 +10,35 @@ import Foundation
 import CloudKit
 
 enum WatchListError {
-    case NotAuthenticated
-    case BackendError(rootCause:NSError)
+    case notAuthenticated
+    case backendError(rootCause:Error)
 }
 
 class WatchList: NSObject {
     static let sharedWatchList = WatchList()
     
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
-    private var container:CKContainer {
+    fileprivate var container:CKContainer {
         return CKContainer(identifier: "iCloud.com.devoxx.TVoxx")
     }
     
-    func isTalkAlreadyInWatchList(talk:TalkDetail, callback:(Bool?,WatchListError?) -> Void){
-        self.container.accountStatusWithCompletionHandler { (accountStatus:CKAccountStatus, error:NSError?) in
-            if accountStatus == CKAccountStatus.NoAccount {
-                dispatch_async(dispatch_get_main_queue(), {
-                    callback(nil, WatchListError.NotAuthenticated)
+    func isTalkAlreadyInWatchList(_ talk:TalkDetail, callback:@escaping (Bool?,WatchListError?) -> Void){
+        self.container.accountStatus { (accountStatus:CKAccountStatus, error:Error?) in
+            if accountStatus == CKAccountStatus.noAccount {
+                DispatchQueue.main.async(execute: {
+                    callback(nil, WatchListError.notAuthenticated)
                 })
             } else {
-                self.container.privateCloudDatabase.fetchRecordWithID(CKRecordID(recordName: talk.talkId), completionHandler: { (record:CKRecord?, error:NSError?) in
-                    if let error = error where error.code != CKErrorCode.UnknownItem.rawValue {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            callback(nil, WatchListError.BackendError(rootCause: error))
+                self.container.privateCloudDatabase.fetch(withRecordID: CKRecordID(recordName: talk.talkId), completionHandler: { (record:CKRecord?, error:Error?) in
+                    if let error = error as? NSError, error.code != CKError.unknownItem.rawValue {
+                        DispatchQueue.main.async(execute: {
+                            callback(nil, WatchListError.backendError(rootCause: error))
                         })
                     } else {
-                        dispatch_async(dispatch_get_main_queue(), { 
+                        DispatchQueue.main.async(execute: {
                             callback(record != nil, nil)
                         })
                     }
@@ -47,25 +47,25 @@ class WatchList: NSObject {
         }
     }
     
-    func moviesInWatchList(callback:([TalkListItem]?,WatchListError?) -> Void) {
-        self.container.accountStatusWithCompletionHandler { (accountStatus:CKAccountStatus, error:NSError?) in
-            if accountStatus == CKAccountStatus.NoAccount {
-                dispatch_async(dispatch_get_main_queue(), {
-                    callback(nil, WatchListError.NotAuthenticated)
+    func moviesInWatchList(_ callback:@escaping ([TalkListItem]?,WatchListError?) -> Void) {
+        self.container.accountStatus { (accountStatus:CKAccountStatus, error:Error?) in
+            if accountStatus == CKAccountStatus.noAccount {
+                DispatchQueue.main.async(execute: {
+                    callback(nil, WatchListError.notAuthenticated)
                 })
             } else {
                 let query = CKQuery(recordType: "Talk", predicate: NSPredicate(value: true))
-                self.container.privateCloudDatabase.performQuery(query, inZoneWithID: nil, completionHandler: { (records:[CKRecord]?, error:NSError?) in
+                self.container.privateCloudDatabase.perform(query, inZoneWith: nil, completionHandler: { (records:[CKRecord]?, error:Error?) in
                     if let error = error {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            callback(nil, WatchListError.BackendError(rootCause: error))
+                        DispatchQueue.main.async(execute: {
+                            callback(nil, WatchListError.backendError(rootCause: error))
                         })
                     } else {
                         var talks = [TalkListItem]()
                         for record in records! {
                             talks.append(TalkListItem(withRecord:record))
                         }
-                        dispatch_async(dispatch_get_main_queue(), { 
+                        DispatchQueue.main.async(execute: {
                             callback(talks, nil)
                         })
                     }
@@ -74,37 +74,37 @@ class WatchList: NSObject {
         }
     }
     
-    func addTalkToWatchList(talk:TalkDetail, callback:WatchListError? -> Void) {
-        self.container.accountStatusWithCompletionHandler { (accountStatus:CKAccountStatus, error:NSError?) in
-            if accountStatus == CKAccountStatus.NoAccount {
-                dispatch_async(dispatch_get_main_queue(), { 
-                    callback(WatchListError.NotAuthenticated)
+    func addTalkToWatchList(_ talk:TalkDetail, callback:@escaping (WatchListError?) -> Void) {
+        self.container.accountStatus { (accountStatus:CKAccountStatus, error:Error?) in
+            if accountStatus == CKAccountStatus.noAccount {
+                DispatchQueue.main.async(execute: { 
+                    callback(WatchListError.notAuthenticated)
                 })
-            } else {                
-                self.container.privateCloudDatabase.saveRecord(talk.record) { (savedRecord:CKRecord?, error:NSError?) in
-                    dispatch_async(dispatch_get_main_queue(), {
+            } else {
+                self.container.privateCloudDatabase.save(talk.record, completionHandler: { (savedRecord:CKRecord?, error:Error?) in
+                    DispatchQueue.main.async(execute: {
                         if let error = error {
-                            callback(WatchListError.BackendError(rootCause: error))
+                            callback(WatchListError.backendError(rootCause: error))
                         } else {
                             callback(nil)
                         }
                     })
-                }
+                }) 
             }
         }
     }
     
-    func removeTalkFromWatchList(talk:TalkDetail, callback:WatchListError? -> Void) {
-        self.container.accountStatusWithCompletionHandler { (accountStatus:CKAccountStatus, error:NSError?) in
-            if accountStatus == CKAccountStatus.NoAccount {
-                dispatch_async(dispatch_get_main_queue(), {
-                    callback(WatchListError.NotAuthenticated)
+    func removeTalkFromWatchList(_ talk:TalkDetail, callback:@escaping (WatchListError?) -> Void) {
+        self.container.accountStatus { (accountStatus:CKAccountStatus, error:Error?) in
+            if accountStatus == CKAccountStatus.noAccount {
+                DispatchQueue.main.async(execute: {
+                    callback(WatchListError.notAuthenticated)
                 })
             } else {
-                self.container.privateCloudDatabase.deleteRecordWithID(CKRecordID(recordName: talk.talkId), completionHandler: { (recordID:CKRecordID?, error:NSError?) in
-                    dispatch_async(dispatch_get_main_queue(), {
+                self.container.privateCloudDatabase.delete(withRecordID: CKRecordID(recordName: talk.talkId), completionHandler: { (recordID:CKRecordID?, error:Error?) in
+                    DispatchQueue.main.async(execute: {
                         if let error = error {
-                            callback(WatchListError.BackendError(rootCause: error))
+                            callback(WatchListError.backendError(rootCause: error))
                         } else {
                             callback(nil)
                         }
